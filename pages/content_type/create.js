@@ -120,7 +120,7 @@ console.log(ctx.query.site_id )
             </div>
           </div>
           <hr className="mt-0 mb-0" />
-          <h3>Colmun Setting :</h3>
+          <h3>Column Setting :</h3>
           <hr />
           {this.tabRow()}
         </form>

@@ -3,7 +3,6 @@ import React from 'react'
 import Link from 'next/link';
 
 import LibCookie from '../../libs/LibCookie'
-//import Layout from '../../components/layout'
 import LayoutAdmin from '../../components/LayoutAdmin'
 import NaviAdmin from '../../components/NaviAdmin'
 
@@ -40,16 +39,16 @@ console.log(item )
       <div className="container">
         <Link href="/sites">
           <a className="btn btn-outline-primary mt-2">Back</a></Link>
-        <hr />
+        <hr className="mt-2 mb-2" />
         <div><h1>Site : {item.name}</h1>
         </div>
         Site_id : {item._id}
-        <hr />
-        <div>Content: {item.content}
+        <hr className="mt-2 mb-2"/>
+        <div>{item.content}
         </div>
-        <hr />
+        <hr className="mt-2 mb-2" />
         <h3>Content ⇓</h3>  
-        <hr />
+        <hr className="mt-2 mb-2" />
         {items.map((item, index) => {
   // console.log(item)
           return (<ContenRow key={index} site_id={site_id}

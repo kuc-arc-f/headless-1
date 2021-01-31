@@ -2,8 +2,7 @@ import Head from 'next/head'
 import React from 'react'
 import Link from 'next/link';
 
-import LibCookie from '../../libs/LibCookie'
-//import Layout from '../../components/layout'
+// import LibCookie from '../../libs/LibCookie'
 import LayoutAdmin from '../../components/LayoutAdmin'
 import NaviAdmin from '../../components/NaviAdmin'
 import ContentRow from './ContentRow'
@@ -14,14 +13,13 @@ export default class extends React.Component {
     var id = ctx.query.id
     var site_id = ctx.query.site_id
   console.log( id ,site_id )
-  // 
     const res = await fetch(process.env.BASE_URL +'/api/columns/show?id=' + id)
     const json = await res.json()
     var item = json.item
     var cole_name = item.name + "_"+site_id
     var url = '/api/content/list?cname=' + item.name
     url += "&site_id=" + site_id
-// console.log( url )
+console.log( url )
     const resContent = await fetch(process.env.BASE_URL + url )
     const jsonContet = await resContent.json()
 // console.log( "coll_name=", cole_name)
@@ -39,7 +37,6 @@ export default class extends React.Component {
   render() {
 //    console.log("id=" , data.id )
     var item = this.props.item
-//    var columns = this.props.columns
     var content_id = this.props.id
     var content_name = item.name
     var site_id = this.props.site_id

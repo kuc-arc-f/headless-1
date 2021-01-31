@@ -4,7 +4,6 @@ import flash from 'next-flash';
 import React, {Component} from 'react';
 import cookies from 'next-cookies'
 
-//import Layout from '../../components/layout'
 import LayoutAdmin from '../../components/LayoutAdmin'
 import NaviAdmin from '../../components/NaviAdmin'
 import EditRow from '../../components/content/EditRow'
@@ -12,7 +11,7 @@ import LibContent from '../../libs/LibContent'
 //
 export default class extends Component {
   static async getInitialProps(ctx) {
-console.log("query=", ctx.query )
+// console.log("query=", ctx.query )
     var id = ctx.query.id
     var site_id = ctx.query.site_id
     var content_name = ctx.query.content_name

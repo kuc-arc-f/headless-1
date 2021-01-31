@@ -135,7 +135,7 @@ console.log("q=", ctx.query)
             </div>
           </div>
           <hr />
-          <h3>Colmun Setting :</h3>
+          <h3>Column Setting :</h3>
           <hr />
           {this.tabRow()}
         </form>

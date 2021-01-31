@@ -22,14 +22,16 @@ console.log(data.blogs)
 }
 export const getStaticProps = async context => {
 console.log( process.env.API_KEY )
+/*
   const res = await fetch(
     `http://hoge.local/api/tasks/list`,
   );
   const blogs = await res.json();
+*/
 //console.log(blogs)
   return {
     props : {
-      blogs: blogs,
+      blogs: [],
     }
   };
 }

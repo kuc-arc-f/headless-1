@@ -4,9 +4,8 @@ import Link from 'next/link';
 
 import LibCookie from '../../libs/LibCookie'
 import Layout from '../../components/layout'
-import ContenRow from './ContenRow'
+import ContentRow from './ContentRow'
 //
-// function Page(data) {
 export default class extends React.Component {
   static async getInitialProps(ctx){
     console.log(ctx.query.site_id)
@@ -46,7 +45,7 @@ console.log(items )
         <hr />  
         {items.map((item, index) => {
   // console.log(item)
-          return (<ContenRow key={index} site_id={site_id}
+          return (<ContentRow key={index} site_id={site_id}
                 id={item._id} name={item.name}  />       
           )
         })}          

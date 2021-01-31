@@ -6,10 +6,9 @@ import LibApiFind from "../../../libs/LibApiFind"
 export default async function (req, res){
   try{
 //console.log(req.query );
-    var content_name = req.query.content
-//    var site_id = req.query.site_id
+//    var content_name = req.query.content
     var id = req.query.id
-    const collection = await LibMongo.get_collection(content_name)
+    const collection = await LibMongo.get_collection("contents")
     var where = { _id: new ObjectID(id) }
     var item = await collection.findOne(where) 
     item = LibApiFind.convertItemOne(item)
