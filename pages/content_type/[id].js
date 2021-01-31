@@ -2,7 +2,9 @@ import Head from 'next/head'
 import React from 'react'
 import Link from 'next/link';
 
-import Layout from '../../components/layout'
+//import Layout from '../../components/layout'
+import LayoutAdmin from '../../components/LayoutAdmin'
+import NaviColumns from '../../components/NaviColumns'
 import ContentRow from './ContentRow'
 //
 function Page(data) {
@@ -12,7 +14,8 @@ console.log(data.item._id )
   const items = data.contents 
 //  console.log(items )
   return (
-  <Layout>
+  <LayoutAdmin>
+    <NaviColumns  site_name={item.name} site_id={item._id} />
     <div className="container">
       <Link href="/sites">
         <a className="btn btn-outline-primary mt-2">Back</a></Link>
@@ -21,10 +24,12 @@ console.log(data.item._id )
         <a className="btn btn-primary mt-2">Create ContentType</a>
       </Link>
       <hr />       
-      <div><h1>SiteName : {item.name}</h1>
+      <div><h1>Site : {item.name}</h1>
       </div>
       <div>Content: {item.content}
       </div>
+      <hr />
+      <h3>Content ⇓</h3>
       <hr /> 
       {items.map((item, index) => {
 // console.log(item)
@@ -34,7 +39,7 @@ console.log(data.item._id )
       })}       
 
     </div>
-  </Layout>
+  </LayoutAdmin>
   )
 }
 //

@@ -19,7 +19,7 @@ export default function Page(props){
         <div className="form-group">
           <label>{props.name} :</label>
           <textarea type="text" name={props.name} 
-            className="form-control" rows="3"></textarea>
+            className="form-control" rows="8"></textarea>
         </div>
       ) : ""
       }

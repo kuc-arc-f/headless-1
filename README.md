@@ -6,7 +6,7 @@
 
  date    : 2021/01/29
 
- update  :
+ update  : 2021/01/31
 
 ***
 ### Summary
@@ -19,6 +19,12 @@ headless CMS sample, Next.js + mongodb
 * mongodb : 3.6.3
 * node : 14.11
 
+
+***
+### Setup
+
+npm install
+
 ***
 ### setup , etc
 * next.config.js
@@ -28,11 +34,6 @@ BASE_URL: "http://localhost:3001"
 * package.json / scripts
 
 "dev": "next dev -p 3001"
-
-***
-### Setup
-
-npx create-next-app app1 --use-npm --example "https://github.com/vercel/next-learn-starter/tree/master/learn-starter"
 
 ***
 ### start server

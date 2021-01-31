@@ -4,7 +4,10 @@ import flash from 'next-flash';
 import React, {Component} from 'react';
 import cookies from 'next-cookies'
 
-import Layout from '../../components/layout'
+import LayoutAdmin from '../../components/LayoutAdmin'
+//import NaviAdmin from '../../components/NaviAdmin'
+import NaviColumns from '../../components/NaviColumns'
+
 import LibContentType from '../../libs/LibContentType'
 import InputRow from './InputRow'
 //
@@ -23,7 +26,6 @@ console.log(ctx.query.site_id )
   }  
   constructor(props){
     super(props)
-//    this.state = {title: '', content: '', _token : ''}
     this.state = {name: '', content: '', _token : '', form_item_arr:null}
     this.handleClick = this.handleClick.bind(this);
     this.database = null
@@ -96,14 +98,15 @@ console.log(ctx.query.site_id )
     }
   }
   render() {
-console.log(this.props.site_id)
+//console.log(this.props.site_id)
     return (
-    <Layout>
+    <LayoutAdmin>
+      <NaviColumns  site_name={""} site_id={this.props.site_id} /> 
       <div className="container">
         <form action="/api/columns/new" method="post" id="myForm" name="myForm">
           <input type="hidden" id="colmuns_json" name="colmuns_json" />
           <input type="hidden" id="site_id" name="site_id" value={this.props.site_id}/>          
-          <Link href="/sites">
+          <Link href={`/content_type/${this.props.site_id}`}>
             <a className="btn btn-outline-primary mt-2">Back</a></Link>
           <hr className="mt-2 mb-2" />
           <h3>Content - Create</h3>
@@ -113,9 +116,10 @@ console.log(this.props.site_id)
               <input type="text" name="content_name"
               className="form-control"
                 />
+              <span className="mt-0"><br />*) 半角英数、アンダースコア( _ )が入力可能です。</span>
             </div>
           </div>
-          <hr />
+          <hr className="mt-0 mb-0" />
           <h3>Colmun Setting :</h3>
           <hr />
           {this.tabRow()}
@@ -125,7 +129,7 @@ console.log(this.props.site_id)
           </button>
         </div>                
       </div>
-    </Layout>
+    </LayoutAdmin>
     )    
   } 
 }

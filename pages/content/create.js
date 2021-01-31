@@ -4,7 +4,9 @@ import flash from 'next-flash';
 import React, {Component} from 'react';
 import cookies from 'next-cookies'
 
-import Layout from '../../components/layout'
+// import Layout from '../../components/layout'
+import LayoutAdmin from '../../components/LayoutAdmin'
+import NaviAdmin from '../../components/NaviAdmin'
 import InputRow from '../../components/content/InputRow'
 //
 export default class extends Component {
@@ -88,7 +90,8 @@ export default class extends Component {
     var  content_name = this.props.content_name
 console.log(site_id)
     return (
-    <Layout>
+    <LayoutAdmin>
+      <NaviAdmin  site_name={""} site_id={site_id} />
       <div className="container">
         <form action="/api/content/new" method="post" id="myForm" name="myForm">
           <input type="hidden" id="colmuns_json" name="colmuns_json" />
@@ -114,7 +117,7 @@ console.log(site_id)
           </button>
         </div>                
       </div>
-    </Layout>
+    </LayoutAdmin>
     )    
   } 
 }

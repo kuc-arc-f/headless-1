@@ -3,7 +3,9 @@ import React from 'react'
 import Link from 'next/link';
 
 import LibCookie from '../../libs/LibCookie'
-import Layout from '../../components/layout'
+//import Layout from '../../components/layout'
+import LayoutAdmin from '../../components/LayoutAdmin'
+import NaviAdmin from '../../components/NaviAdmin'
 import ContentRow from './ContentRow'
 //
 export default class extends React.Component {
@@ -37,7 +39,7 @@ export default class extends React.Component {
   render() {
 //    console.log("id=" , data.id )
     var item = this.props.item
-    var columns = this.props.columns
+//    var columns = this.props.columns
     var content_id = this.props.id
     var content_name = item.name
     var site_id = this.props.site_id
@@ -46,7 +48,8 @@ export default class extends React.Component {
     var content_url =`/content/edit?site_id=${site_id}&content_name=${content_name}`
     var url_new = `/content/create?content_id=${content_id}&site_id=${site_id}`
     return (
-    <Layout>
+    <LayoutAdmin>
+      <NaviAdmin  site_name={""} site_id={site_id} /> 
       <div className="container">
         <Link href={`/content/list?site_id=${site_id}`}>
           <a className="btn btn-outline-primary mt-2">Back</a></Link>
@@ -59,8 +62,6 @@ export default class extends React.Component {
         </div>
         <div>Content: {item.content}
         </div>
-        <hr />
-        <h3>List</h3> 
         <hr />
         {contents.map((item, index) => {
 //console.log(item )
@@ -75,7 +76,7 @@ export default class extends React.Component {
           )
         })}    
       </div>
-    </Layout>
+    </LayoutAdmin>
     )
   }
 }

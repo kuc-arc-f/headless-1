@@ -34,7 +34,7 @@ export default class extends React.Component {
             <label>{this.props.name} :</label>
             <textarea type="text" name={this.props.name} value={this.state.value}
               onChange={this.handleChange.bind(this)} className="form-control"
-             rows="3"></textarea>
+             rows="8"></textarea>
           </div>
         ) : ""
         }

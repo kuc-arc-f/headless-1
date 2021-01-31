@@ -3,7 +3,10 @@ import React from 'react'
 import Link from 'next/link';
 
 import LibCookie from '../../libs/LibCookie'
-import Layout from '../../components/layout'
+//import Layout from '../../components/layout'
+import LayoutAdmin from '../../components/LayoutAdmin'
+import NaviAdmin from '../../components/NaviAdmin'
+
 import ContenRow from './ContenRow'
 //
 export default class extends React.Component {
@@ -32,7 +35,8 @@ export default class extends React.Component {
     const items = this.props.contents    
 console.log(item )
     return (
-    <Layout>
+    <LayoutAdmin >
+      <NaviAdmin  site_name={item.name} site_id={item._id} /> 
       <div className="container">
         <Link href="/sites">
           <a className="btn btn-outline-primary mt-2">Back</a></Link>
@@ -43,7 +47,9 @@ console.log(item )
         <hr />
         <div>Content: {item.content}
         </div>
-        <hr />  
+        <hr />
+        <h3>Content ⇓</h3>  
+        <hr />
         {items.map((item, index) => {
   // console.log(item)
           return (<ContenRow key={index} site_id={site_id}
@@ -51,7 +57,7 @@ console.log(item )
           )
         })}          
       </div>
-    </Layout>
+    </LayoutAdmin>
    )
   }
 }

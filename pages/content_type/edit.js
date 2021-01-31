@@ -4,9 +4,11 @@ import flash from 'next-flash';
 import React, {Component} from 'react';
 import cookies from 'next-cookies'
 
-import Layout from '../../components/layout'
+//import Layout from '../../components/layout'
+import LayoutAdmin from '../../components/LayoutAdmin'
+import NaviColumns from '../../components/NaviColumns'
+
 import LibContentType from '../../libs/LibContentType'
-// import InputRow from './InputRow'
 import EditRow from './EditRow'
 //
 export default class extends Component {
@@ -24,7 +26,8 @@ console.log("q=", ctx.query)
       user_id :cookies(ctx).user_id,
       column_id: column_id,
       csrf: json.csrf,
-      site_id: ctx.query.site_id,
+//      site_id: ctx.query.site_id,
+      site_id :cookies(ctx).site_id,
       columns: columns,
       colmun_item: jsonColmun.item,
     }
@@ -112,13 +115,14 @@ console.log("q=", ctx.query)
   render() {
 //console.log(this.props.site_id)
     return (
-    <Layout>
+    <LayoutAdmin>
+      <NaviColumns  site_name={""} site_id={this.props.site_id} />
       <div className="container">
         <form action="/api/columns/update" method="post" id="myForm" name="myForm">
           <input type="hidden" id="colmuns_json" name="colmuns_json" />
           <input type="hidden" id="site_id" name="site_id" value={this.props.site_id}/>  
           <input type="hidden" id="id" name="id" value={this.props.column_id}/>  
-          <Link href="/sites">
+          <Link href={`/content_type/${this.props.site_id}`}>
             <a className="btn btn-outline-primary mt-2">Back</a></Link>
           <hr className="mt-2 mb-2" />
           <h3>Content - Create</h3>
@@ -136,11 +140,11 @@ console.log("q=", ctx.query)
           {this.tabRow()}
         </form>
         <div className="form-group">
-          <button className="btn btn-primary" onClick={this.handleClick}>Create
+          <button className="btn btn-primary" onClick={this.handleClick}>Save
           </button>
         </div>                
       </div>
-    </Layout>
+    </LayoutAdmin>
     )    
   } 
 }

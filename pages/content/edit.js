@@ -4,7 +4,9 @@ import flash from 'next-flash';
 import React, {Component} from 'react';
 import cookies from 'next-cookies'
 
-import Layout from '../../components/layout'
+//import Layout from '../../components/layout'
+import LayoutAdmin from '../../components/LayoutAdmin'
+import NaviAdmin from '../../components/NaviAdmin'
 import EditRow from '../../components/content/EditRow'
 import LibContent from '../../libs/LibContent'
 //
@@ -117,14 +119,15 @@ console.log(json)
     var contentObj = this.props.content.values
 console.log(contentObj)
     return (
-    <Layout>
+    <LayoutAdmin>
+      <NaviAdmin  site_name={""} site_id={site_id} />
       <div className="container">
         <form action="/api/content/update" method="post" id="myForm" name="myForm">
           <input type="hidden" id="colmuns_json" name="colmuns_json" />
           <input type="hidden" id="site_id" name="site_id" value={site_id}/> 
           <input type="hidden" id="id" name="id" value={this.props.content_id}/> 
           <input type="hidden" id="content_name" name="content_name" value={content_name}/> 
-          <Link href="/sites">
+          <Link href={`/content/list?site_id=${site_id}`}>
             <a className="btn btn-outline-primary mt-2">Back</a></Link>
           <hr className="mt-2 mb-2" />
           <h3>{content_name} - Edit</h3>
@@ -150,7 +153,7 @@ console.log(contentObj)
           </button>
         </div>
       </div>
-    </Layout>
+    </LayoutAdmin>
     )    
   } 
 }
