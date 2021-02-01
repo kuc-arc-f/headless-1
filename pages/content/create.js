@@ -4,10 +4,11 @@ import flash from 'next-flash';
 import React, {Component} from 'react';
 import cookies from 'next-cookies'
 
-// import Layout from '../../components/layout'
 import LayoutAdmin from '../../components/LayoutAdmin'
 import NaviAdmin from '../../components/NaviAdmin'
 import InputRow from '../../components/content/InputRow'
+import Footer from '../../components/Footer'
+
 //
 export default class extends Component {
   static async getInitialProps(ctx) {
@@ -117,6 +118,7 @@ console.log(site_id)
           </button>
         </div>                
       </div>
+      <Footer />
     </LayoutAdmin>
     )    
   } 

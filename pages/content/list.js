@@ -1,10 +1,11 @@
-import Head from 'next/head'
+//import Head from 'next/head'
 import React from 'react'
 import Link from 'next/link';
 
 import LibCookie from '../../libs/LibCookie'
 import LayoutAdmin from '../../components/LayoutAdmin'
 import NaviAdmin from '../../components/NaviAdmin'
+import Footer from '../../components/Footer'
 
 import ColumnRow from './ColumnRow'
 import ContentRow from './ContentRow'
@@ -63,11 +64,14 @@ export default class extends React.Component {
         <hr className="mt-2 mb-2" />
         <div><h1>Site : {item.name}</h1>
         </div>
-        Site_id : {item._id}
-        <hr className="mt-2 mb-2"/>
-        <div>{item.content}
+        <div className="row">
+          <div className="col-sm-6">Site_id : {item._id}
+          </div>
+          <div className="col-sm-6">
+            <div>{item.content}</div>
+          </div>
         </div>
-        <hr className="mt-2 mb-2" />
+        <hr className="mt-1 mb-1" />
         <div className="row">
           <div className="col-sm-4">
             <h3>Content ⇓</h3> 
@@ -103,6 +107,7 @@ export default class extends React.Component {
         </div>
 
       </div>
+      <Footer />
     </LayoutAdmin>
    )
   }

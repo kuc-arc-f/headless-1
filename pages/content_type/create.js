@@ -5,8 +5,8 @@ import React, {Component} from 'react';
 import cookies from 'next-cookies'
 
 import LayoutAdmin from '../../components/LayoutAdmin'
-//import NaviAdmin from '../../components/NaviAdmin'
 import NaviColumns from '../../components/NaviColumns'
+import Footer from '../../components/Footer'
 
 import LibContentType from '../../libs/LibContentType'
 import InputRow from './InputRow'
@@ -129,6 +129,7 @@ console.log(ctx.query.site_id )
           </button>
         </div>                
       </div>
+      <Footer />
     </LayoutAdmin>
     )    
   } 

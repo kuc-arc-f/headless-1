@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import LayoutAdmin from '../../components/LayoutAdmin'
 import NaviColumns from '../../components/NaviColumns'
+import Footer from '../../components/Footer'
 import ContentRow from './ContentRow'
 //
 function Page(data) {
@@ -18,18 +19,23 @@ console.log(data.item._id )
     <div className="container">
       <Link href="/sites">
         <a className="btn btn-outline-primary mt-2">Back</a></Link>
-      <hr />
+        <hr className="mt-2 mb-2" />
       <Link href={`/content_type/create?site_id=${site_id}`}>
         <a className="btn btn-primary mt-2">Create ContentType</a>
       </Link>
-      <hr />       
+      <hr className="mt-2 mb-2" />       
       <div><h1>Site : {item.name}</h1>
       </div>
-      <div>{item.content}
+      <div className="row">
+        <div className="col-sm-6">Site_id : {item._id}
+        </div>
+        <div className="col-sm-6">
+          <div>{item.content}</div>
+        </div>
       </div>
-      <hr />
+      <hr className="mt-1 mb-1" />
       <h3>Content ⇓</h3>
-      <hr /> 
+      <hr className="mt-2 mb-2" />
       {items.map((item, index) => {
 // console.log(item)
         return (<ContentRow key={index} site_id={site_id}
@@ -38,6 +44,7 @@ console.log(data.item._id )
       })}       
 
     </div>
+    <Footer />
   </LayoutAdmin>
   )
 }

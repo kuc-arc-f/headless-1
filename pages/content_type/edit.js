@@ -4,9 +4,9 @@ import flash from 'next-flash';
 import React, {Component} from 'react';
 import cookies from 'next-cookies'
 
-//import Layout from '../../components/layout'
 import LayoutAdmin from '../../components/LayoutAdmin'
 import NaviColumns from '../../components/NaviColumns'
+import Footer from '../../components/Footer'
 
 import LibContentType from '../../libs/LibContentType'
 import EditRow from './EditRow'
@@ -144,6 +144,7 @@ console.log("q=", ctx.query)
           </button>
         </div>                
       </div>
+      <Footer />
     </LayoutAdmin>
     )    
   } 

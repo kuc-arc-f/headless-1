@@ -7,6 +7,7 @@ import cookies from 'next-cookies'
 import LayoutAdmin from '../../components/LayoutAdmin'
 import NaviAdmin from '../../components/NaviAdmin'
 import EditRow from '../../components/content/EditRow'
+import Footer from '../../components/Footer'
 import LibContent from '../../libs/LibContent'
 //
 export default class extends Component {
@@ -155,6 +156,7 @@ console.log(contentObj)
           </button>
         </div>
       </div>
+      <Footer />
     </LayoutAdmin>
     )    
   } 

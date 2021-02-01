@@ -10,11 +10,13 @@ function Home(data) {
     <Layout>
       <hr />
       <LoginBox user_id={data.user_id} />
-      <div className="container">
+      <div className="container mb-0">
         <h1>Home</h1>
         <p>This is home page.</p>
+        <br /><br /><br />
       </div>
-      <hr />
+      <hr className="mb-0"/>
+      <br /><br /><br /><br />
     </Layout>
     )
   }

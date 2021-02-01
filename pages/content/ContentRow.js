@@ -11,6 +11,7 @@ const IndexRow = props => (
         <a className="btn btn-sm btn-outline-primary"> Edit</a>
       </Link>
     </div>
+    <hr className="mt-1 mb-1"/>
   </div>
 );
 export default IndexRow;
