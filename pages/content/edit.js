@@ -23,12 +23,12 @@ export default class extends Component {
 // console.log( url_show )
     const resContent = await fetch(process.env.BASE_URL + url_show)
     const jsonContent = await resContent.json() 
-console.log(  jsonContent )    
+//console.log(  jsonContent )    
     var column_id = jsonContent.item.column_id
     const resColmun = await fetch(process.env.BASE_URL +'/api/columns/show?id=' + column_id)
     const jsonColmun = await resColmun.json()  
     var columns = JSON.parse(jsonColmun.item.values || '[]')  
-//console.log(  columns )    
+//console.log(  jsonColmun.item.name )    
     return { 
       user_id :cookies(ctx).user_id,
       site_id :cookies(ctx).site_id,
@@ -36,7 +36,7 @@ console.log(  jsonContent )
       content_id: id,
       columns: columns,
       content: jsonContent.item,
-      content_name: content_name
+      content_name: jsonColmun.item.name
     }
   }  
   constructor(props){
@@ -64,6 +64,7 @@ console.log(  jsonContent )
       var item = {
         content_name: content_name,
         id: this.props.content_id,
+        site_id: this.props.site_id,
         _token: this.state._token
       }
 //console.log(item)
@@ -74,7 +75,9 @@ console.log(  jsonContent )
       });
       if (res.status === 200) {
         alert("Complete, delete")
-        Router.push('/sites');
+        var content_id = this.props.content_id
+        var url  = `/content/list?site_id=${this.props.site_id}&column=${content_id}`
+        Router.push(url);
       } else {
         throw new Error(await res.text());
       }

@@ -26,14 +26,14 @@ export default async function (req, res){
 //console.log( item )
     const collection = await LibMongo.get_collection( "contents" )
     await collection.insertOne(item); 
-    var url = `/content/show?id=${item.column_id}&site_id=${item.site_id}`
-    console.log( "url=",url  )
+    var url = `/content/list?site_id=${item.site_id}&column=${item.column_id}`
+//    console.log( "url=",url  )
     if (res) {
       res.writeHead(302, { Location: url });
       res.end();
     } 
   } catch (err) {
-      console.log(err);
-      res.status(500).send();    
+    console.log(err);
+    res.status(500).send();    
   }   
 };

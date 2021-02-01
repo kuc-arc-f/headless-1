@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Head from 'next/head';
 //
-// export default function Page(props) {
 export default function Page(props){
 console.log(props.site_name )
 // site_id
@@ -15,6 +14,11 @@ console.log(props.site_name )
       <ul className="navbar-nav mr-auto">
         <li className="nav-item active">
           <Link href="/" className="nav-link"> [ Home ] </Link>                    
+        </li>
+        <li className="nav-item active">
+          <Link href={`/content_type/${props.site_id}`} className="nav-link">
+            <a>[ ContentType ]</a>  
+          </Link>                    
         </li>
         <li className="nav-item active">
           <Link href={`/content/list?site_id=${props.site_id}`} className="nav-link">

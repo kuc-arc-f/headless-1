@@ -2,7 +2,6 @@ import Head from 'next/head'
 import React from 'react'
 import Link from 'next/link';
 
-//import Layout from '../../components/layout'
 import LayoutAdmin from '../../components/LayoutAdmin'
 import NaviColumns from '../../components/NaviColumns'
 import ContentRow from './ContentRow'
@@ -26,7 +25,7 @@ console.log(data.item._id )
       <hr />       
       <div><h1>Site : {item.name}</h1>
       </div>
-      <div>Content: {item.content}
+      <div>{item.content}
       </div>
       <hr />
       <h3>Content ⇓</h3>

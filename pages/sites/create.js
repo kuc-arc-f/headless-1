@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import cookies from 'next-cookies'
 
 import Layout from '../../components/layout'
+import LibSite from '../../libs/LibSite'
 //
 export default class extends Component {
   static async getInitialProps(ctx) {
@@ -19,7 +20,6 @@ export default class extends Component {
   }  
   constructor(props){
     super(props)
-//    this.state = {title: '', content: '', _token : ''}
     this.state = {name: '', content: '', _token : ''}
     this.handleClick = this.handleClick.bind(this);
     this.database = null
@@ -44,18 +44,24 @@ export default class extends Component {
   } 
   async add_item(){
     try {
+      var myForm = document.getElementById('myForm');
+      var formData = new FormData(myForm); 
+      var valid = LibSite.valid_form(formData)
+      if(valid==false){ throw new Error('Invalid , valid_form'); }      
       var item = {
         name: this.state.name,
         content: this.state.content,
         _token: this.state._token
       }
-console.log(item)
+//console.log(item)
       const res = await fetch(process.env.BASE_URL + '/api/sites/new', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', },
         body: JSON.stringify(item),
       });
       if (res.status === 200) {
+        const json = await res.json()
+//console.log(json)
         Router.push('/sites');
       } else {
         throw new Error(await res.text());
@@ -69,7 +75,8 @@ console.log(item)
     return (
       <Layout>
         <div className="container">
-          <Link href="/tasks">
+        <form method="post" id="myForm" name="myForm">
+        <Link href="/sites">
             <a className="btn btn-outline-primary mt-2">Back</a></Link>
           <hr className="mt-2 mb-2" />
           <h1>Site - Create</h1>
@@ -77,7 +84,7 @@ console.log(item)
             <div className="col-md-6">
                 <div className="form-group">
                     <label>Name:</label>
-                    <input type="text" className="form-control"
+                    <input type="text" className="form-control" name="name"
                     onChange={this.handleChangeTitle.bind(this)} />
                 </div>
             </div>
@@ -90,12 +97,13 @@ console.log(item)
                     onChange={this.handleChangeContent.bind(this)}/>
               </div>
               </div>
-          </div><br />          
-          <div className="form-group">
-              <button className="btn btn-primary" onClick={this.handleClick}>Create
-              </button>
-          </div>                
-          <hr />
+          </div>        
+        </form>
+        <hr />
+        <div className="form-group">
+            <button className="btn btn-primary" onClick={this.handleClick}>Create
+            </button>
+        </div>                
         </div>
       </Layout>
     )    

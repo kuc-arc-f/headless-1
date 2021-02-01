@@ -17,6 +17,11 @@ console.log(props.site_name )
           <Link href="/" className="nav-link"> [ Home ] </Link>                    
         </li>
         <li className="nav-item active">
+          <Link href={`/content/list?site_id=${props.site_id}`} className="nav-link">
+            <a>[ Content ]</a>  
+          </Link>                    
+        </li>
+        <li className="nav-item active">
           <Link href={`/content_type/${props.site_id}`} className="nav-link">
             <a>[ Site:  {props.site_name} ]</a>  
           </Link>                    

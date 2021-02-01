@@ -98,7 +98,7 @@ console.log(site_id)
           <input type="hidden" id="site_id" name="site_id" value={site_id}/> 
           <input type="hidden" id="column_id" name="column_id" value={this.props.content_id}/> 
           <input type="hidden" id="content_name" name="content_name" value={content_name}/> 
-          <Link href="/sites">
+          <Link href={`/content/list?site_id=${site_id}`}>
             <a className="btn btn-outline-primary mt-2">Back</a></Link>
           <hr className="mt-2 mb-2" />
           <h3>{content_name} - Add</h3>

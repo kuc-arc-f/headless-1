@@ -1,5 +1,4 @@
 import Link from 'next/link';
-//import Header from '../Layout/AppHead';
 
 const IndexRow = props => (
   <tr>
@@ -10,6 +9,9 @@ const IndexRow = props => (
       {props.date} , ID: {props.id}
     </td>
     <td>
+      <Link href={`/content/list?site_id=${props.id}`}>
+        <a className="btn btn-sm ml-2 btn-outline-primary"> Open </a>
+      </Link>
       <Link href={`/content_type/${props.id}`}>
         <a className="btn btn-sm ml-2 btn-outline-primary"> ContentType</a>
       </Link>
