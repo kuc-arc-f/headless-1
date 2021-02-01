@@ -29,7 +29,7 @@ export default class extends React.Component {
     const json = await res.json()
     const resColumn = await fetch(process.env.BASE_URL +'/api/columns/list?site_id='+ id)
     const jsonColumn = await resColumn.json()
-// console.log(jsonColumn)
+// console.log(jsonColumn.items)
     var item = json.item
     return { item:item , 
       column_id: column_id,
@@ -54,7 +54,7 @@ export default class extends React.Component {
     var url_new = `/content/create?content_id=${column_id}&site_id=${site_id}`
     const contents = this.props.contents    
     const items = this.props.columns    
-// console.log(item )
+//console.log(item )
     return (
     <LayoutAdmin >
       <NaviAdmin  site_name={item.name} site_id={item._id} /> 

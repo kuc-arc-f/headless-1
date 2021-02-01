@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Router from 'next/router'
+import flash from 'next-flash';
 import React, {Component} from 'react';
 import cookies from 'next-cookies'
 
@@ -10,10 +11,14 @@ export default class extends Component {
     var url = process.env.BASE_URL + '/api/token_get'
     const res = await fetch(url)
     const json = await res.json()
-//console.log(json)
+    var url_count = process.env.BASE_URL + '/api/users/users_count'
+    const resCount = await fetch(url_count)
+    const jsonCount = await resCount.json()
+//console.log(jsonCount.count )
     return { 
       user_id :cookies(ctx).user_id,
       csrf: json.csrf,
+      count: jsonCount.count,
     }
   }  
   constructor(props){
@@ -26,10 +31,14 @@ export default class extends Component {
     this.handleChange = this.handleChange.bind(this);    
     this.handleClick = this.handleClick.bind(this);
     this.database = null
-// console.log(props)
+// console.log(this.props.count)
   }
   componentDidMount(){
     this.setState({ _token: this.props.csrf.token });
+    if(parseInt(this.props.count) > 0){
+      flash.set({ messages_error: 'Error, admin user max 1' })
+      Router.push('/login');
+    }
   }   
   handleChangeTitle(e){
     this.setState({title: e.target.value})

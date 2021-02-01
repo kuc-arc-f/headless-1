@@ -1,26 +1,35 @@
 import Link from 'next/link';
+import Router from 'next/router'
 import Layout from '../../components/layout'
 import cookies from 'next-cookies'
+import flash from 'next-flash';
 
 import IndexRow from './IndexRow';
 //
 export default class Page extends React.Component {
-  constructor(props){
-    super(props)
-//console.log(this.props)
-  }  
   static async getInitialProps(ctx) {
     const res = await fetch(process.env.BASE_URL+ '/api/sites/list')
     const json = await res.json()
-console.log(json)
+// console.log(json)
     return { 
-      items: json.items ,user_id :cookies(ctx).user_id
-//      items: []
+      items: json.items ,
+      user_id :cookies(ctx).user_id
     }
   }
+  constructor(props){
+    super(props)
+console.log(props)
+  }
+  componentDidMount(){
+    console.log( "user_id=" ,this.props.user_id )
+    if(typeof this.props.user_id === 'undefined'){
+      flash.set({ messages_error: 'Error, Login require' })
+      Router.push('/login');
+    }    
+  }  
   render() {
     const items = this.props.items
-console.log(items)
+// console.log(items)
     return (
     <Layout>
       <div className="container">

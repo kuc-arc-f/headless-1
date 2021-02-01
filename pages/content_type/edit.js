@@ -125,16 +125,13 @@ console.log("q=", ctx.query)
           <Link href={`/content_type/${this.props.site_id}`}>
             <a className="btn btn-outline-primary mt-2">Back</a></Link>
           <hr className="mt-2 mb-2" />
-          <h3>Content - Create</h3>
+          <h3>Content - Edit</h3>
           <div className="row">
-            <div className="col-md-6 form-group">
-              <label>Content Name:</label>
-              <input type="text" name="content_name"
-              className="form-control" value={this.state.content_name}
-              onChange={this.handleChange.bind(this)}  />
+            <div className="col-md-6 form-group mb-0">
+              <label>Content Name : {this.state.content_name}</label>
             </div>
           </div>
-          <hr />
+          <hr className="mt-2 mb-2" />
           <h3>Column Setting :</h3>
           <hr />
           {this.tabRow()}
