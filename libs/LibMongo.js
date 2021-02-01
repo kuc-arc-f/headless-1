@@ -4,9 +4,8 @@ const MongoClient = require('mongodb').MongoClient;
 //
 export default {
     init:function(){
-        this.dbName = "hcms"
-        this.url = "mongodb://localhost:27017"
-//        this.url = "mongodb://mongo:27017" 
+        this.dbName = process.env.MONGODB_DB_NAME
+        this.url = process.env.MONGODB_URL
     },        
    get_collection:async function(collectionName ){
         try{

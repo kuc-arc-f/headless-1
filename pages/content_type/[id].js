@@ -8,7 +8,7 @@ import Footer from '../../components/Footer'
 import ContentRow from './ContentRow'
 //
 function Page(data) {
-console.log(data.item._id )
+//console.log(data.item._id )
   var site_id= data.item._id
   var item = data.item
   const items = data.contents 

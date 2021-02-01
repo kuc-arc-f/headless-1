@@ -94,7 +94,7 @@ export default class extends Component {
       var formData = new FormData(myForm); 
       var elem = []
       columns.map((item, index) => {
-console.log(item.name)
+//console.log(item.name)
         if(item.name != ""){
           var value = formData.get( item.name )
           var item = {
@@ -105,7 +105,7 @@ console.log(item.name)
         }
       })      
       var json= JSON.stringify( elem );
-console.log(json)
+// console.log(json)
       var elemJson = document.getElementById('colmuns_json');
       elemJson.value = json
       document.myForm.submit()
@@ -120,7 +120,7 @@ console.log(json)
     var site_id = this.props.site_id
     var content_name = this.props.content_name
     var contentObj = this.props.content.values
-console.log(contentObj)
+// console.log(contentObj)
     return (
     <LayoutAdmin>
       <NaviAdmin  site_name={""} site_id={site_id} />

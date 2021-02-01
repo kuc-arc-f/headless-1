@@ -7,7 +7,7 @@ import TopHeadBox from '../components/TopHeadBox'
 import IndexRow from './IndexRow';
 //
 function Page(data) {
-console.log(data.blogs)
+// console.log(data.blogs)
   var items = data.blogs.contents
   return (
     <Layout>
@@ -21,14 +21,14 @@ console.log(data.blogs)
     )
 }
 export const getStaticProps = async context => {
-console.log( process.env.API_KEY )
+//console.log( process.env.API_KEY )
 /*
   const res = await fetch(
     `http://hoge.local/api/tasks/list`,
   );
   const blogs = await res.json();
 */
-//console.log(blogs)
+// console.log(process.env.MONGODB_URL)
   return {
     props : {
       blogs: [],
