@@ -111,6 +111,10 @@ content name : Site > ContentType > content name
 
 site_id : Site > open > site_id
 
+***
+### SSG sample, Next.js 
+
+https://github.com/kuc-arc-f/jamstack-head-sample
 
 ***
 ### Blog : 
