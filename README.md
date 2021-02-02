@@ -113,7 +113,11 @@ site_id : Site > open > site_id
 
 
 ***
-### Blog :
+### Blog : 
+
+* Headless CMS のような機能の作成【作例】
+
+https://note.com/knaka0209/n/n98586919b8bd
 
 ***
 
