@@ -3,6 +3,7 @@ var csrf = require('csrf');
 var tokens = new csrf();
 
 import LibMongo from "../../../libs/LibMongo"
+import LibSite from "../../../libs/LibSite"
 
 //
 export default async function (req, res){
@@ -19,9 +20,21 @@ export default async function (req, res){
       user_id: "",
       created_at: new Date(),
     };
-//console.log(item)
     const collection = await LibMongo.get_collection("sites" )
     await collection.insertOne(item); 
+// console.log("id=", item._id.toString() , typeof(item._id) )
+    //
+    var key = LibSite.get_apikey()
+    var itemKey ={
+      site_id: item._id.toString(),
+      key: key,
+      user_id: "",
+      created_at: new Date(),
+    }
+    const collectionKey = await LibMongo.get_collection("apikeys" )
+    await collectionKey.insertOne(itemKey); 
+console.log(itemKey)   
+
     var ret ={
       item: item
     }
