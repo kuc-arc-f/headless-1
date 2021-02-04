@@ -3,6 +3,7 @@ import React from 'react'
 import Layout from '../components/layout'
 import LibCommon from '../libs/LibCommon'
 import LibPagenate from '../libs/LibPagenate'
+import LibTest from '../libs/LibTest'
 import TopHeadBox from '../components/TopHeadBox'
 import IndexRow from './IndexRow';
 //
@@ -20,19 +21,20 @@ function Page(data) {
     </Layout>
     )
 }
+//
 export const getStaticProps = async context => {
-//console.log( process.env.API_KEY )
-/*
-  const res = await fetch(
-    `http://hoge.local/api/tasks/list`,
-  );
-  const blogs = await res.json();
-*/
-// console.log(process.env.MONGODB_URL)
-  return {
-    props : {
-      blogs: [],
+console.log(process.env.API_KEY)
+  try {
+    for(var i=1; i <= 30; i++){
+//      await LibTest.add_test(i)
     }
-  };
+    return {
+      props : {
+        blogs: [],
+      }
+    };
+  } catch (error) {
+    console.error(error);
+  }
 }
 export default Page

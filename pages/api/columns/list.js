@@ -4,7 +4,7 @@ import LibMongo from "../../../libs/LibMongo"
 //
 export default async function (req, res){
   try{
-console.log( "site_id=", req.query.site_id )
+//console.log( "site_id=", req.query.site_id )
     var site_id = req.query.site_id 
     var collection = await LibMongo.get_collection("columns" )
     var where = { site_id: site_id }

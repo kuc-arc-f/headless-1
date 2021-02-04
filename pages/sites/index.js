@@ -13,12 +13,13 @@ export default class Page extends React.Component {
 // console.log(json)
     return { 
       items: json.items ,
-      user_id :cookies(ctx).user_id
+      user_id :cookies(ctx).user_id,
+      flash: flash.get(ctx)|| {},
     }
   }
   constructor(props){
     super(props)
-console.log(props)
+// console.log(props)
   }
   componentDidMount(){
     console.log( "user_id=" ,this.props.user_id )
@@ -32,6 +33,9 @@ console.log(props)
 // console.log(items)
     return (
     <Layout>
+      { this.props.flash.messages_error ? 
+      <div className="alert alert-danger" role="alert">{this.props.flash.messages_error}</div> 
+      : <div /> }
       <div className="container">
         <Link href="/sites/create">
           <a className="btn btn-primary mt-2">Create Site</a>

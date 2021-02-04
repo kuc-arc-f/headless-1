@@ -3,16 +3,19 @@ import cookies from 'next-cookies'
 
 import Layout from '../components/layout'
 import LoginBox from '../components/LoginBox'
+import LibConst from '../libs/LibConst'
+
 //
 function Home(data) {
-  console.log( "user_id=", data.user_id )
+// console.log( "user_id=", data.user_id )
     return (
     <Layout>
       <hr />
       <LoginBox user_id={data.user_id} />
       <div className="container mb-0">
+        version : { data.version }
         <h1>Home</h1>
-        <p>This is home page.</p>
+        <p>welcome , headless-1</p>
         <br /><br /><br />
       </div>
       <hr className="mb-0"/>
@@ -22,8 +25,10 @@ function Home(data) {
   }
   //
   Home.getInitialProps = async (ctx) => {
-    console.log("uid=", cookies(ctx).user_id)
-    return { user_id: cookies(ctx).user_id }
+//    console.log("uid=", cookies(ctx).user_id, LibConst.get_config().VERSION )
+    return { user_id: cookies(ctx).user_id ,
+      version: LibConst.get_config().VERSION
+    }
   }
   
   export default Home
