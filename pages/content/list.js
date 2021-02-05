@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import LibCookie from '../../libs/LibCookie'
 import LibPagenate from '../../libs/LibPagenate'
+import LibCommon from '../../libs/LibCommon'
 import LayoutAdmin from '../../components/LayoutAdmin'
 import NaviAdmin from '../../components/NaviAdmin'
 import Footer from '../../components/Footer'
@@ -11,6 +12,7 @@ import PagingBox from '../../components/PagingBox'
 
 import ColumnRow from './ColumnRow'
 import ContentRow from './ContentRow'
+
 //
 export default class extends React.Component {
   static async getInitialProps(ctx){
@@ -31,8 +33,9 @@ export default class extends React.Component {
       const jsonContent = await resContent.json()
       contents = jsonContent.items
       LibPagenate.init()
-      var display = LibPagenate.is_paging_display(contents.length)      
-// console.log(display )
+      var display = LibPagenate.is_paging_display(contents.length)  
+      contents = LibCommon.convert_items(contents)    
+// console.log(contents )
     }
     const res = await fetch(process.env.BASE_URL +'/api/sites/show?id=' + id)
     const json = await res.json()
@@ -77,13 +80,13 @@ export default class extends React.Component {
     return (
     <LayoutAdmin >
       <NaviAdmin  site_name={item.name} site_id={item._id} /> 
-      <div className="container">
+      <div className="container content_list_wrap">
         <Link href="/sites">
           <a className="btn btn-outline-primary mt-2">Back</a></Link>
         <hr className="mt-2 mb-2" />
         <div className="row">
           <div className="col-sm-6">
-            <h1>Site : {item.name}</h1>
+            <h3>Site : {item.name}</h3>
           </div>
           <div className="col-sm-6">
           </div>
@@ -96,10 +99,10 @@ export default class extends React.Component {
             <div>{item.content}</div>
           </div>
         </div>
-        <hr className="mt-1 mb-1" />
+        <hr className="mt-2 mb-2" />
         <div className="row">
           <div className="col-sm-4">
-            <h3>Content ⇓</h3> 
+            <h3>Content Name :</h3> 
             <hr className="mt-2 mb-2" />
             {items.map((item, index) => {
       // console.log(item)
@@ -114,9 +117,14 @@ export default class extends React.Component {
               <Link href={url_new}>
                 <a className="btn btn-primary mt-2">Ceate Content</a>
               </Link>
-              <hr />            
             </div>
             : ""}
+            <table className="table table-hover content_table mt-2">
+            <thead>
+              <tr><th>Data</th><th>Actions</th>
+              </tr>
+            </thead>  
+            <tbody>
             {contents.map((item, index) => {
     //console.log(item )
               var values = item.values
@@ -127,6 +135,8 @@ export default class extends React.Component {
                 row1_name={values[0].name} row1_value={values[0].value } />
               )
             })}
+            </tbody>            
+            </table>
             <div className="paging_box_wrap mt-3">
               <PagingBox page={this.props.page} paginateDisp={paginateDisp} 
               site_id={site_id} column_id={column_id} />

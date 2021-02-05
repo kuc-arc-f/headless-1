@@ -3,8 +3,7 @@ import Head from 'next/head';
 //
 // export default function Page(props) {
 export default function Page(props){
-console.log(props.site_name )
-// site_id
+//console.log(props.site_name )
   return (
   <nav className="navbar navbar-expand-lg navbar-light bg-light">
     <Link href="/" className="navbar-brand"> </Link> 

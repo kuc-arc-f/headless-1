@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import LayoutAdmin from '../../components/LayoutAdmin'
 import NaviColumns from '../../components/NaviColumns'
+import LibCommon from '../../libs/LibCommon'
 import Footer from '../../components/Footer'
 import ContentRow from './ContentRow'
 //
@@ -11,7 +12,8 @@ function Page(data) {
 //console.log(data.item._id )
   var site_id= data.item._id
   var item = data.item
-  const items = data.contents 
+  var items = data.contents 
+  items = LibCommon.convert_items(items)
 //  console.log(items )
   return (
   <LayoutAdmin>
@@ -24,7 +26,7 @@ function Page(data) {
         <a className="btn btn-primary mt-2">Create ContentType</a>
       </Link>
       <hr className="mt-2 mb-2" />       
-      <div><h1>Site : {item.name}</h1>
+      <div><h3>Site : {item.name}</h3>
       </div>
       <div className="row">
         <div className="col-sm-6">Site_id : {item._id}
@@ -33,15 +35,20 @@ function Page(data) {
           <div>{item.content}</div>
         </div>
       </div>
-      <hr className="mt-1 mb-1" />
-      <h3>Content ⇓</h3>
-      <hr className="mt-2 mb-2" />
-      {items.map((item, index) => {
-// console.log(item)
-        return (<ContentRow key={index} site_id={site_id}
-          id={item._id} name={item.name} date={item.created_at} />       
-        )
-      })}       
+      <table className="table table-hover mt-2">
+        <thead>
+          <tr><th>Content Name</th><th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        {items.map((item, index) => {
+  // console.log(item)
+          return (<ContentRow key={index} site_id={site_id}
+            id={item._id} name={item.name} date={item.created_at} />       
+          )
+        })}       
+        </tbody>
+      </table>
 
     </div>
     <Footer />

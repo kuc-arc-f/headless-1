@@ -1,12 +1,15 @@
 import Head from 'next/head';
 import Navibar from './Navibar';
 import Footer from './Footer';
+import LibConst from '../libs/LibConst';
 //
 function Layout({ children }) {
+//  console.log("SYS_NAME=", LibConst.get_config().SYS_NAME)
+  var sys_name = LibConst.get_config().SYS_NAME
   return (
     <div>
       <Head>
-        <title key="title">NextJs App</title>
+        <title key="title">{sys_name}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossOrigin="anonymous" />
         <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet" />

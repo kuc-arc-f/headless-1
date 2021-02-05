@@ -4,15 +4,18 @@ import Layout from '../../components/layout'
 import cookies from 'next-cookies'
 import flash from 'next-flash';
 
+import LibCommon from '../../libs/LibCommon'
+
 import IndexRow from './IndexRow';
 //
 export default class Page extends React.Component {
   static async getInitialProps(ctx) {
     const res = await fetch(process.env.BASE_URL+ '/api/sites/list')
     const json = await res.json()
-// console.log(json)
+    var items = LibCommon.convert_items(json.items)
+//console.log(items)
     return { 
-      items: json.items ,
+      items: items ,
       user_id :cookies(ctx).user_id,
       flash: flash.get(ctx)|| {},
     }

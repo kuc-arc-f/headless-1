@@ -40,7 +40,7 @@ export default class extends Component {
   }
   componentDidMount(){
     this.setState({ _token: this.props.csrf.token });
-    console.log( "user_id=" ,this.props.user_id )
+// console.log( "user_id=" ,this.props.user_id )
     if(typeof this.props.user_id === 'undefined'){
       flash.set({ messages_error: 'Error, Login require' })
       Router.push('/login');
@@ -89,7 +89,7 @@ export default class extends Component {
     var columns = this.props.columns
     var site_id = this.props.site_id
     var  content_name = this.props.content_name
-console.log(site_id)
+// console.log(site_id)
     return (
     <LayoutAdmin>
       <NaviAdmin  site_name={""} site_id={site_id} />

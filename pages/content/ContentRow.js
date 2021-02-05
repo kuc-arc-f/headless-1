@@ -1,17 +1,25 @@
 import Link from 'next/link';
 
 const IndexRow = props => (
-  <div>
-    <div>
-      <h3><a>{ props.row1_name} : { props.row1_value }</a></h3>
+  <tr>
+    <td>
+      <p className="p_title mt-0 mb-0">
+        <a>{ props.row1_name} : { props.row1_value }</a>
+      </p>
       Date: {props.date} , ID: {props.id}
-    </div>
-    <div>
+    </td>
+    <td>
       <Link href={props.content_url}>
         <a className="btn btn-sm btn-outline-primary"> Edit</a>
       </Link>
-    </div>
-    <hr className="mt-1 mb-1"/>
-  </div>
+    </td>
+    <style>{`
+      .content_list_wrap .content_table .p_title{ 
+        font-size: 1.4rem; 
+        font-weight : bold;
+      }
+    `}
+    </style>
+  </tr>
 );
 export default IndexRow;
