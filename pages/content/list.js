@@ -1,6 +1,7 @@
 //import Head from 'next/head'
 import React from 'react'
 import Link from 'next/link';
+import flash from 'next-flash';
 
 import LibCookie from '../../libs/LibCookie'
 import LibPagenate from '../../libs/LibPagenate'
@@ -9,6 +10,7 @@ import LayoutAdmin from '../../components/LayoutAdmin'
 import NaviAdmin from '../../components/NaviAdmin'
 import Footer from '../../components/Footer'
 import PagingBox from '../../components/PagingBox'
+import FlashBox from '../../components/FlashBox'
 
 import ColumnRow from './ColumnRow'
 import ContentRow from './ContentRow'
@@ -51,6 +53,7 @@ export default class extends React.Component {
       apikey: apikey,
       pagingDisplay: display,
       page: page,
+      flash: flash.get(ctx)|| {},
     }
   }
   constructor(props){
@@ -76,10 +79,15 @@ export default class extends React.Component {
     const items = this.props.columns   
 // console.log(contents)
     var paginateDisp = this.props.pagingDisplay
+    var messages_error = ""
+    if( typeof this.props.flash.messages_error != 'undefined'){
+      messages_error = this.props.flash.messages_error
+    }
 // console.log("pagingDisplay=" ,this.props.pagingDisplay )
     return (
     <LayoutAdmin >
       <NaviAdmin  site_name={item.name} site_id={item._id} /> 
+      <FlashBox messages_error={messages_error} />
       <div className="container content_list_wrap">
         <Link href="/sites">
           <a className="btn btn-outline-primary mt-2">Back</a></Link>
@@ -89,6 +97,9 @@ export default class extends React.Component {
             <h3>Site : {item.name}</h3>
           </div>
           <div className="col-sm-6">
+            <Link href={`/sites/webook?site_id=${site_id}`}>
+            <a className="btn btn-outline-primary mt-2 ml-2">Webook </a>
+          </Link>
           </div>
         </div>
         <div className="row">

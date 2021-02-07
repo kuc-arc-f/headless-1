@@ -14,7 +14,10 @@ const IndexRow = props => (
       </Link>
       <Link href={`/content_type/${props.id}`}>
         <a className="btn btn-sm ml-2 btn-outline-primary"> ContentType</a>
-      </Link>
+      </Link><br />
+      <Link href={`/sites/setting/${props.id}`}>
+        <a className="btn btn-sm ml-2 btn-outline-primary mt-2"> Site Setting</a>
+      </Link>      
     </td>
   </tr>
 );

@@ -1,12 +1,12 @@
 # headless-1
 
- Version: 0.9.2
+ Version: 0.9.4
 
  Author  : Kouji Nakashima / kuc-arc-f.com
 
  date    : 2021/01/29
 
- update  : 2021/02/04 
+ update  : 2021/02/07
 
 ***
 ### Summary
