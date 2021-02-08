@@ -1,7 +1,7 @@
 
 # Webhook
 
-* ver 0.9.2移行で利用可能です。
+* ver 0.9.4 移行で利用可能です。
 ***
 
 * netlifyの webhookを、起動できます。
