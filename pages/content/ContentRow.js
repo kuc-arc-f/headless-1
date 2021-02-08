@@ -6,20 +6,13 @@ const IndexRow = props => (
       <p className="p_title mt-0 mb-0">
         <a>{ props.row1_name} : { props.row1_value }</a>
       </p>
-      Date: {props.date} , ID: {props.id}
+      {props.date} , ID: {props.id}
     </td>
     <td>
       <Link href={props.content_url}>
         <a className="btn btn-sm btn-outline-primary"> Edit</a>
       </Link>
     </td>
-    <style>{`
-      .content_list_wrap .content_table .p_title{ 
-        font-size: 1.4rem; 
-        font-weight : bold;
-      }
-    `}
-    </style>
   </tr>
 );
 export default IndexRow;

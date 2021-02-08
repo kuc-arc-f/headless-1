@@ -2,9 +2,11 @@ import Head from 'next/head'
 import React from 'react'
 import Router from 'next/router'
 import Link from 'next/link';
+import flash from 'next-flash';
 
 //import LibCookie from '../../libs/LibCookie'
 import Layout from '../../../components/layout'
+
 //
 export default class extends React.Component {
   static async getInitialProps(ctx){
@@ -46,7 +48,8 @@ export default class extends React.Component {
       });
       if (res.status === 200) {
 //        const json = await res.json()
-        alert("Success, save URL")
+//        alert("Success, save URL")
+        flash.set({ messages_success: 'Success, save URL' })
 //console.log(json)
         Router.push('/sites');
       } else {

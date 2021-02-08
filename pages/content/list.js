@@ -98,12 +98,12 @@ export default class extends React.Component {
           </div>
           <div className="col-sm-6">
             <Link href={`/sites/webook?site_id=${site_id}`}>
-            <a className="btn btn-outline-primary mt-2 ml-2">Webook </a>
+            <a className="btn btn-sm btn-outline-primary mt-2 ml-2">Webook </a>
           </Link>
           </div>
         </div>
         <div className="row">
-          <div className="col-sm-6">Site_id : {item._id}<br />
+          <div className="col-sm-6 p_apikey">Site_id : {item._id}<br />
           API KEY : {key}
           </div>
           <div className="col-sm-6">
@@ -113,7 +113,7 @@ export default class extends React.Component {
         <hr className="mt-2 mb-2" />
         <div className="row">
           <div className="col-sm-4">
-            <h3>Content Name :</h3> 
+            <h3 className="content_title">Content Name :</h3> 
             <hr className="mt-2 mb-2" />
             {items.map((item, index) => {
       // console.log(item)

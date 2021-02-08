@@ -1,6 +1,8 @@
 
 # API Write sample
 
+* ver 0.9.2移行で利用可能です。
+
 ***
 ### create
 

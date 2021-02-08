@@ -16,7 +16,9 @@ const IndexRow = props => (
         <a className="btn btn-sm ml-2 btn-outline-primary"> ContentType</a>
       </Link><br />
       <Link href={`/sites/setting/${props.id}`}>
-        <a className="btn btn-sm ml-2 btn-outline-primary mt-2"> Site Setting</a>
+        <a className="btn btn-sm ml-2 btn-outline-dark mt-2"> 
+          <i className="fas fa-cog"></i> Site Setting
+        </a>
       </Link>      
     </td>
   </tr>

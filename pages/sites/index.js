@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import Router from 'next/router'
-import Layout from '../../components/layout'
 import cookies from 'next-cookies'
 import flash from 'next-flash';
 
 import LibCommon from '../../libs/LibCommon'
+import Layout from '../../components/layout'
+import FlashBox from '../../components/FlashBox'
 
 import IndexRow from './IndexRow';
 //
@@ -17,7 +18,7 @@ export default class Page extends React.Component {
     return { 
       items: items ,
       user_id :cookies(ctx).user_id,
-      flash: flash.get(ctx)|| {},
+      flash: flash.get(ctx) || {},
     }
   }
   constructor(props){
@@ -36,6 +37,7 @@ export default class Page extends React.Component {
 // console.log(items)
     return (
     <Layout>
+      <FlashBox messages_success={this.props.flash.messages_success} />
       { this.props.flash.messages_error ? 
       <div className="alert alert-danger" role="alert">{this.props.flash.messages_error}</div> 
       : <div /> }

@@ -18,7 +18,7 @@ function Page(data) {
   return (
   <LayoutAdmin>
     <NaviColumns  site_name={item.name} site_id={item._id} />
-    <div className="container">
+    <div className="container content_type_wrap">
       <Link href="/sites">
         <a className="btn btn-outline-primary mt-2">Back</a></Link>
         <hr className="mt-2 mb-2" />
@@ -29,7 +29,7 @@ function Page(data) {
       <div><h3>Site : {item.name}</h3>
       </div>
       <div className="row">
-        <div className="col-sm-6">Site_id : {item._id}
+        <div className="col-sm-6 p_site_id">Site_id : {item._id}
         </div>
         <div className="col-sm-6">
           <div>{item.content}</div>
