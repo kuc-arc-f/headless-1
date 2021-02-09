@@ -19,80 +19,135 @@ import ContentRow from './ContentRow'
 export default class extends React.Component {
   static async getInitialProps(ctx){
 //console.log(ctx.query )
-    var id = ctx.query.site_id
-    var column_id = ""
-    var contents = []
-    var page = 1
-//console.log("page=" , ctx.query.page )
-    if( typeof ctx.query.column !='undefined'){
-      column_id = ctx.query.column
-      if(typeof ctx.query.page !='undefined'){
-        page = ctx.query.page
-      }
-      var url_content = '/api/content/list_id?site_id='+ id + "&id=" + column_id
-      url_content += "&page=" + String(page)
-      const resContent = await fetch(process.env.BASE_URL + url_content )
-      const jsonContent = await resContent.json()
-      contents = jsonContent.items
-      LibPagenate.init()
-      var display = LibPagenate.is_paging_display(contents.length)  
-      contents = LibCommon.convert_items(contents)    
-// console.log(contents )
+    return { 
+      query: ctx.query,
+      flash: flash.get(ctx)|| {},
     }
-    const res = await fetch(process.env.BASE_URL +'/api/sites/show?id=' + id)
+  }
+  constructor(props){
+    super(props)
+    this.state = {
+      item: {}, 
+      column_id: "",
+      site_id: this.props.query.site_id,
+      columns : [],
+      contents: [],
+      apikey: '',
+      pagingDisplay: 0,
+      page: 0,
+    }
+  } 
+  async componentDidMount(){
+// console.log(this.props.query )
+    var column_id = ""
+    var site_id = this.props.query.site_id
+    var contents = []
+    var page = 1    
+    var display = 0
+    LibCookie.set_cookie("site_id", this.props.query.site_id )
+    const res = await fetch(process.env.BASE_URL +'/api/sites/show?id=' + site_id)
     const json = await res.json()
-    const resColumn = await fetch(process.env.BASE_URL +'/api/columns/list?site_id='+ id)
-    const jsonColumn = await resColumn.json()
-//console.log(json)
+    const resColumn = await fetch(process.env.BASE_URL +'/api/columns/list?site_id='+ site_id)
+    const jsonColumn = await resColumn.json()    
     var item = json.item
-    var apikey = json.apikey
-    return { item:item , 
+    var apikey = json.apikey 
+//console.log( json )  
+    this.setState({
+      item:item , 
       column_id: column_id,
       columns :jsonColumn.items ,
       contents: contents,
       apikey: apikey,
       pagingDisplay: display,
       page: page,
-      flash: flash.get(ctx)|| {},
-    }
-  }
-  constructor(props){
-    super(props)
-//console.log(props )
-  } 
-  componentDidMount(){
-    LibCookie.set_cookie("site_id", this.props.item._id ) 
+    })    
   }   
+  async handleClickColumn(id){
+//console.log( "handleClickColumn=", id )
+      var site_id= this.state.site_id
+      var url_content = '/api/content/list_id?site_id='+ site_id + "&id=" + id
+  //    url_content += "&page=" + String(page)
+      const resContent = await fetch(process.env.BASE_URL + url_content )
+      const jsonContent = await resContent.json()
+      var contents = jsonContent.items
+      LibPagenate.init()
+      var display = LibPagenate.is_paging_display(contents.length)  
+      contents = LibCommon.convert_items(contents)       
+// console.log( contents )
+      this.setState({ contents: contents,
+        column_id: id,
+        pagingDisplay: display,
+      })     
+      var elemKey = document.getElementById('search_key');
+      elemKey.value = ""
+      this.addSearchEvent(elemKey)
+  }
+  async addSearchEvent(elem){
+    var self = this
+    elem.addEventListener('keypress',async function(e){
+      try {
+        if (e.keyCode === 13) {
+//          console.log( "keyCode=" , e.keyCode )
+//console.log("#addSearchEvent=" , elem.value )
+          var column_id = self.state.column_id
+          var site_id= self.state.item._id
+          var item = {
+            search_key: elem.value,
+            column_id: column_id,
+            site_id: site_id,
+          }
+          const res = await fetch(process.env.BASE_URL + '/api/content/search', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', },
+            body: JSON.stringify(item),
+          });
+          if (res.status === 200) {
+            const json = await res.json()
+            self.setState({ contents: json.items ,
+              pagingDisplay: 0,
+            });
+          } else {
+            throw new Error(await res.text());
+          } 
+          return false;          
+        }
+      } catch (error) {
+        alert("Error, addSearchEvent")
+        console.error(error);
+      }       
+    });
+  }
   render(){
-//console.log( this.props.apikey)
-    var column_id = this.props.column_id
-    var site_id= this.props.item._id
+    var column_id = this.state.column_id
+    var site_id= this.state.site_id
     var key = ""
-    if(this.props.apikey != null){
-      key = this.props.apikey.key
+    if(this.state.apikey != null){
+      key = this.state.apikey.key
     }
-// console.log("key=", key )
-    var item = this.props.item
-    var content_url =`/content/edit?site_id=${site_id}&content_name=${item.name}`
-    var url_new = `/content/create?content_id=${column_id}&site_id=${site_id}`
-    const contents = this.props.contents    
-    const items = this.props.columns   
-// console.log(contents)
-    var paginateDisp = this.props.pagingDisplay
+    var item = {}
+    if( this.state.item instanceof Object){
+      item = this.state.item
+    }
+    var paginateDisp = this.state.pagingDisplay
     var messages_error = ""
     if( typeof this.props.flash.messages_error != 'undefined'){
       messages_error = this.props.flash.messages_error
-    }
+    }    
+    var content_url =`/content/edit?site_id=${site_id}&content_name=${item.name}`
+    var url_new = `/content/create?content_id=${column_id}&site_id=${site_id}`
+    var contents = this.state.contents 
+    const items = this.state.columns 
+//console.log( items )
 // console.log("pagingDisplay=" ,this.props.pagingDisplay )
     return (
     <LayoutAdmin >
-      <NaviAdmin  site_name={item.name} site_id={item._id} /> 
+      <NaviAdmin  site_name={item.name} site_id={item._id} />
       <FlashBox messages_error={messages_error} />
       <div className="container content_list_wrap">
         <Link href="/sites">
           <a className="btn btn-outline-primary mt-2">Back</a></Link>
-        <hr className="mt-2 mb-2" />
-        <div className="row">
+          <hr className="mt-2 mb-2" />
+          <div className="row">
           <div className="col-sm-6">
             <h3>Site : {item.name}</h3>
           </div>
@@ -108,7 +163,7 @@ export default class extends React.Component {
           </div>
           <div className="col-sm-6">
             <div>{item.content}</div>
-          </div>
+          </div>          
         </div>
         <hr className="mt-2 mb-2" />
         <div className="row">
@@ -117,8 +172,22 @@ export default class extends React.Component {
             <hr className="mt-2 mb-2" />
             {items.map((item, index) => {
       // console.log(item)
-              return (<ColumnRow key={index} site_id={site_id}
-                    id={item._id} name={item.name}  />       
+              return(
+              <div key={index}>
+                <div className="row">
+                  <div className="col-sm-8">
+                    <button className="btn btn-sm btn-outline-primary"
+                    onClick={this.handleClickColumn.bind(this, item._id)}>{item.name}
+                    </button>
+                  </div>
+                  <div className="col-sm-4">
+                    <span className="name_arrow">
+                      <i className="fas fa-arrow-circle-right ml-3"></i>
+                    </span>
+                  </div>
+                </div>
+                <hr className="mt-2 mb-2"/>
+              </div>              
               )
             })}          
           </div>
@@ -126,8 +195,10 @@ export default class extends React.Component {
             {column_id ? 
             <div>
               <Link href={url_new}>
-                <a className="btn btn-primary mt-2">Ceate Content</a>
+                <a className="btn btn-sm btn-primary mt-0">Ceate Content</a>
               </Link>
+                <input type="text" id="search_key" name="search_key" 
+                className="form-control mt-2"placeholder="Search key input , and Return" />
             </div>
             : ""}
             <table className="table table-hover content_table mt-2">
@@ -148,20 +219,11 @@ export default class extends React.Component {
             })}
             </tbody>            
             </table>
-            <div className="paging_box_wrap mt-3">
-              <PagingBox page={this.props.page} paginateDisp={paginateDisp} 
-              site_id={site_id} column_id={column_id} />
-            </div>
-          </div>
+          </div>          
         </div>
-
-      </div>
+      </div> 
       <Footer />
     </LayoutAdmin>
    )
   }
 }
-
-
-
-

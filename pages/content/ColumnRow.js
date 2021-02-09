@@ -5,12 +5,8 @@ const IndexRow = props => (
   <div>
     <div className="row">
       <div className="col-sm-8">
-        <Link href={`/content/list?site_id=${props.site_id}&column=${props.id}`}>
-          <a>
-            <button className="btn btn-sm btn-outline-primary">{props.name}
-            </button>
-          </a>
-        </Link>
+        <button className="btn btn-sm btn-outline-primary">{props.name}
+        </button>
       </div>
       <div className="col-sm-4">
         <span className="name_arrow">
