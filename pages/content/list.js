@@ -51,6 +51,15 @@ export default class extends React.Component {
     const jsonColumn = await resColumn.json()    
     var item = json.item
     var apikey = json.apikey 
+    if( typeof this.props.query.column !='undefined'){
+      column_id = this.props.query.column
+      var url_content = '/api/content/list_id?site_id='+ site_id + "&id=" + column_id
+//      url_content += "&page=" + String(page)
+      const resContent = await fetch(process.env.BASE_URL + url_content )
+      const jsonContent = await resContent.json()
+      contents = jsonContent.items
+      contents = LibCommon.convert_items(contents)    
+    }    
 //console.log( json )  
     this.setState({
       item:item , 
