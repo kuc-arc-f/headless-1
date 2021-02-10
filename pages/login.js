@@ -6,6 +6,7 @@ import cookies from 'next-cookies'
 import flash from 'next-flash';
 
 import Layout from '../components/layout'
+import FlashBox from '../components/FlashBox'
 import LibCookie from '../libs/LibCookie'
 //
 class Page extends React.Component {
@@ -53,7 +54,8 @@ class Page extends React.Component {
         if(parseInt(json.ret) === 1){
           console.log("OK, post_item")
           LibCookie.set_cookie("user_id", json.user._id) 
-          alert("Success, Login")          
+          alert("Success, Login")  
+          flash.set({ messages_success: 'Success Login, welcome!! ' })        
           Router.push('/');
         }else{
           console.log("NG, post_item")
@@ -80,6 +82,7 @@ class Page extends React.Component {
   render() {
     return (
     <Layout>
+      <FlashBox messages_success={this.props.flash.messages_success} />
       { this.props.flash.messages_error ? 
       <div className="alert alert-danger" role="alert">{this.props.flash.messages_error}</div> 
       : <div /> }

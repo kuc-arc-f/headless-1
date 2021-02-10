@@ -65,9 +65,10 @@ export default class extends Component {
         });
       if (res.status === 200) {
         var json = await res.json()
-console.log( json )
+// console.log( json )
         alert("Success, User add")
-        Router.push('/');
+        flash.set({ messages_success: 'Complete user add, please Login' })
+        Router.push('/login');
       } else {
         throw new Error(await res.text());
       }
