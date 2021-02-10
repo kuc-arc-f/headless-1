@@ -11,19 +11,24 @@ export default function Navibar(){
     <div className="collapse navbar-collapse" id="navbarNav">
       <ul className="navbar-nav mr-auto">
         <li className="nav-item active">
-          <Link href="/" className="nav-link"> [ Home ] </Link>                    
+          <Link href="/" className="nav-link">
+            <a className="ml-2"> <i className="fas fa-home"></i> Home </a>
+          </Link>                    
         </li>
         <li className="nav-item active">
-          <Link href="/sites" className="nav-link"> [ Site ] </Link>                    
+          <Link href="/sites" className="nav-link">
+            <a className="ml-2"><i className="fas fa-check"></i> Site </a></Link>                    
         </li>
       </ul>
       <ul className="navbar-nav">
         <li className="nav-item">
-          <Link href="/login" className="nav-link"> [ Login ] 
+          <Link href="/login" className="nav-link">
+            <a><i className="fas fa-sign-in-alt"></i> Login </a>
           </Link>                    
         </li>
         <li className="nav-item">
-          <Link href="/about" className="nav-link"> [ About ]
+          <Link href="/about" className="nav-link">
+            <a><i className="fas fa-info ml-2"></i> About </a> 
           </Link>                    
         </li>
       </ul>            

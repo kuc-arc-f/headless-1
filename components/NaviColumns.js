@@ -13,16 +13,17 @@ export default function Page(props){
     <div className="collapse navbar-collapse" id="navbarNav">
       <ul className="navbar-nav mr-auto">
         <li className="nav-item active">
-          <Link href="/" className="nav-link"> [ Home ] </Link>                    
+          <Link href="/" className="nav-link">
+            <a className="ml-2"><i className="fas fa-home"></i> Home </a></Link>                    
         </li>
         <li className="nav-item active">
           <Link href={`/content/list?site_id=${props.site_id}`} className="nav-link">
-            <a>[ Content ]</a>  
+            <a className="ml-2"><i className="fas fa-check"></i> Content</a>  
           </Link>                    
         </li>
         <li className="nav-item active">
           <Link href={`/content_type/${props.site_id}`} className="nav-link">
-            <a>[ Site:  {props.site_name} ]</a>  
+            <a className="ml-2 btn btn-sm btn-outline-primary">Site: {props.site_name}</a>  
           </Link>                    
         </li>
       </ul>

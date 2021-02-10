@@ -144,26 +144,27 @@ export default class extends React.Component {
       <NaviAdmin  site_name={item.name} site_id={item._id} />
       <FlashBox messages_error={messages_error} />
       <div className="container content_list_wrap">
-        <Link href="/sites">
-          <a className="btn btn-outline-primary mt-2">Back</a></Link>
-          <hr className="mt-2 mb-2" />
-          <div className="row">
-          <div className="col-sm-6">
-            <h3>Site : {item.name}</h3>
+        <div className="row">
+          <div className="col-sm-4">
+            <Link href="/sites">
+              <a className="btn btn-outline-primary mt-2">Back</a></Link>
           </div>
-          <div className="col-sm-6">
-            <Link href={`/sites/webook?site_id=${site_id}`}>
-            <a className="btn btn-sm btn-outline-primary mt-2 ml-2">Webook </a>
-          </Link>
+          <div className="col-sm-8">
+            <h1>{item.name}</h1>
           </div>
         </div>
-        <div className="row">
-          <div className="col-sm-6 p_apikey">Site_id : {item._id}<br />
-          API KEY : {key}
+          <hr className="mt-0 mb-2" />
+          <div className="row">
+          <div className="col-sm-4 p_apikey">Site_id : {item._id}<br />
           </div>
-          <div className="col-sm-6">
-            <div>{item.content}</div>
-          </div>          
+          <div className="col-sm-4 p_apikey" >
+            API KEY : {key}
+          </div>
+          <div className="col-sm-4 webhook_wrap" >
+            <Link href={`/sites/webook?site_id=${site_id}`}>
+            <a className="btn btn-sm btn-outline-primary mt-0 ml-2">Webook </a>
+          </Link>
+          </div>
         </div>
         <hr className="mt-2 mb-2" />
         <div className="row">

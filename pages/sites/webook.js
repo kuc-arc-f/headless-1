@@ -13,11 +13,12 @@ export default class extends React.Component {
     const res = await fetch(process.env.BASE_URL +'/api/sites/setting_get?id=' + id)
     const json = await res.json()
     var item = json.item
-console.log( item )
-    if(item == null){
-    }
+//console.log( json.site )
+//    if(item == null){
+//    }
     return { item: item ,
       site_id: id,
+      site: json.site,
     }
   }
   constructor(props){
@@ -61,7 +62,8 @@ console.log("#complete-webhook")
   render(){
     var item = this.props.item
     var site_id = this.props.site_id
-    console.log(item )
+    var site = this.props.site
+//console.log(this.props.site )
     var webhook_url = ""
     if(item != null){
       webhook_url = item.webhook_url
@@ -73,6 +75,8 @@ console.log("#complete-webhook")
           <a className="btn btn-outline-primary mt-2">Back</a></Link>
         <hr />
         <h1>Webhook</h1>
+        Site : {site.name}<br />
+        Site_id : {site._id}
         <hr />
         webhook url : {webhook_url}
         <hr /> 

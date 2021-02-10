@@ -10,10 +10,10 @@ function Home(data) {
 // console.log( "user_id=", data.user_id )
     return (
     <Layout>
-      <hr />
-      <LoginBox user_id={data.user_id} />
       <div className="container mb-0">
-        version : { data.version }
+        <br />
+        <LoginBox user_id={data.user_id} />
+        <p className="mt-2">version : { data.version }</p>
         <h1>Home</h1>
         <p>welcome , headless-1</p>
         <br /><br /><br />

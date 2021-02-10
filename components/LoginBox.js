@@ -8,8 +8,12 @@ export default function Page(props) {
 //console.log("user_id:", user_id)
   return (
   <div>
-    { user_id ? <Link href="/logout"><a>[ Logout ]</a></Link> : 
-    <Link href="/login"><a>[ Login ]</a></Link> }
+    { user_id ? <Link href="/logout">
+      <a><i className="fas fa-sign-out-alt"></i> Logout </a></Link> : 
+    <Link href="/login">
+      <a><i className="fas fa-sign-in-alt"></i> Login </a>
+    </Link> 
+    }
   </div>
   );
 }
