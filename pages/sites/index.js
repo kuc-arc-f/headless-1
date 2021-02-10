@@ -50,7 +50,7 @@ export default class Page extends React.Component {
         <table className="table table-hover">
           <tbody>
           {items.map((item, index) => {
-            return (<IndexRow key={index}
+            return (<IndexRow key={index} content={item.content}
                   id={item._id} name={item.name} date={item.created_at} />       
             )
           })}

@@ -13,15 +13,19 @@ import InputRow from './InputRow'
 //
 export default class extends Component {
   static async getInitialProps(ctx) {
-console.log(ctx.query.site_id )
+//console.log(ctx.query.site_id )
+    var site_id = ctx.query.site_id
     var url = process.env.BASE_URL + '/api/token_get'
     const res = await fetch(url)
     const json = await res.json()
-//console.log(json)
+    const resColumn = await fetch(process.env.BASE_URL +'/api/columns/list?site_id='+ site_id)
+    const jsonColumn = await resColumn.json()        
+//console.log(jsonColumn.items)
     return { 
       user_id :cookies(ctx).user_id,
       csrf: json.csrf,
-      site_id: ctx.query.site_id
+      site_id: ctx.query.site_id,
+      colmuns: jsonColumn.items,
     }
   }  
   constructor(props){
@@ -32,6 +36,7 @@ console.log(ctx.query.site_id )
 // console.log(props)
   }
   componentDidMount(){
+//console.log(this.props.colmuns)
     var arr = []
     for(var i= 0;i < 10; i++){
       var item = {  index : i }
@@ -61,12 +66,15 @@ console.log(ctx.query.site_id )
       var formData = new FormData(myForm); 
       var valid = LibContentType.valid_form(formData)
       if(valid==false){ throw new Error('Invalid , valid_form'); }
-//console.log(valid)
+      valid = LibContentType.validContentName(
+        this.props.colmuns, formData.get( "content_name" )
+      )
+//  console.log(valid)
+      if(valid==false){ throw new Error('Invalid , valid_form'); }
       var elem = []
       for(var i= 0; i< 10; i++){
         var inputName = "colmun["+i+"]name"
         var inputType = "colmun["+i+"]type"
-//        var d = formData.get('colmun[0]name');     
         var name = formData.get( inputName )
         var type = formData.get( inputType )        
         var item = {

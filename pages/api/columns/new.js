@@ -26,8 +26,10 @@ console.log(data)
 console.log(item)
     const collection = await LibMongo.get_collection("columns" )
     await collection.insertOne(item); 
+    var url = "/content_type/" + data.site_id
     if (res) {
-      res.writeHead(302, { Location: '/sites' });
+//      res.writeHead(302, { Location: '/sites' });
+      res.writeHead(302, { Location: url });
       res.end();
     } 
   } catch (err) {

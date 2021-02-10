@@ -16,7 +16,23 @@ console.log( content_name)
 //            console.error(`Error: ${JSON.stringify(err)}`)
             throw new Error('Error , get_show_item');
         }          
-    },    
+    },
+    validContentName :function(items , content_name){
+      try {
+        var ret = true
+        items.forEach(function(item){
+console.log("name=", item.name , content_name);
+          if(item.name === content_name){
+            ret = false
+            alert("Error, content_name is already exist")
+          }
+        });
+        return ret
+      } catch (err) {
+//            console.error(`Error: ${JSON.stringify(err)}`)
+        throw new Error('Error , get_show_item');
+      }          
+    },         
     func1 :async function(){
     },
 
