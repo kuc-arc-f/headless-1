@@ -70,7 +70,7 @@ export default class extends React.Component {
       pagingDisplay: display,
       page: page,
     })
-    this.init_copy_event()
+//    this.init_copy_event()
   }
   init_copy_event(){
     var str = "コピーする文字";
@@ -78,7 +78,7 @@ export default class extends React.Component {
         e.clipboardData.setData("text/plain" , str);    
         // 本来のイベントをキャンセル
         e.preventDefault();
-//        document.removeEventListener("copy", listener);
+        document.removeEventListener("copy", listener);
     }
     // コピーのイベントが発生したときに、クリップボードに書き込むようにしておく
     document.addEventListener("copy" , listener);    
