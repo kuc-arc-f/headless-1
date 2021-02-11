@@ -20,6 +20,18 @@ content name : Site > ContentType > content name
 
 site_id : Site > open > site_id
 
+* skip, limit (option)
+
+skip : start position
+
+limit : limit record count
+
+* curl sample / skip, limit
+
+```
+curl "http://localhost:3001/api/get/find?content=test_1&site_id=601a52687c693223ee03f570&skip=0&limit=10"
+```
+
 ***
 ### findone
 
