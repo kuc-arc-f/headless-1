@@ -69,13 +69,25 @@ export default class extends React.Component {
       apikey: apikey,
       pagingDisplay: display,
       page: page,
-    })    
+    })
+    this.init_copy_event()
+  }
+  init_copy_event(){
+    var str = "コピーする文字";
+    var listener = function(e){
+        e.clipboardData.setData("text/plain" , str);    
+        // 本来のイベントをキャンセル
+        e.preventDefault();
+//        document.removeEventListener("copy", listener);
+    }
+    // コピーのイベントが発生したときに、クリップボードに書き込むようにしておく
+    document.addEventListener("copy" , listener);    
   }   
   async handleClickColumn(id){
 //console.log( "handleClickColumn=", id )
       var site_id= this.state.site_id
       var url_content = '/api/content/list_id?site_id='+ site_id + "&id=" + id
-  //    url_content += "&page=" + String(page)
+      url_content += "&page=" + String(this.state.page)
       const resContent = await fetch(process.env.BASE_URL + url_content )
       const jsonContent = await resContent.json()
       var contents = jsonContent.items
@@ -86,6 +98,7 @@ export default class extends React.Component {
       this.setState({ contents: contents,
         column_id: id,
         pagingDisplay: display,
+        page: 1,
       })     
       var elemKey = document.getElementById('search_key');
       elemKey.value = ""
@@ -126,6 +139,25 @@ export default class extends React.Component {
       }       
     });
   }
+  handleClickCopyKey(){
+console.log("#handleClickCopyKey")
+    document.execCommand("copy");
+  }
+  async parentMethod(page){
+console.log("#parentMethod.p=" + page )
+    var url_content = '/api/content/list_id?site_id='+ this.state.site_id + "&id=" + this.state.column_id
+    url_content += "&page=" + String(page)
+    const resContent = await fetch(process.env.BASE_URL + url_content )
+    const jsonContent = await resContent.json()
+    LibPagenate.init()
+    var contents = jsonContent.items
+    var display = LibPagenate.is_paging_display(contents.length)  
+    contents = LibCommon.convert_items(contents)        
+    this.setState({ contents: jsonContent.items,
+      pagingDisplay: display,
+      page: page,
+    });      
+  }  
   render(){
     var column_id = this.state.column_id
     var site_id= this.state.site_id
@@ -207,7 +239,7 @@ export default class extends React.Component {
               <Link href={url_new}>
                 <a className="btn btn-sm btn-primary mt-0">Ceate Content</a>
               </Link>
-                <input type="text" id="search_key" name="search_key" 
+                <input type="text" id="search_key" name="search_key" autoComplete="off" 
                 className="form-control mt-2"placeholder="Search key input , and Return" />
             </div>
             : ""}
@@ -229,6 +261,11 @@ export default class extends React.Component {
             })}
             </tbody>            
             </table>
+            <div className="paging_box_wrap mt-3">
+              <PagingBox parent_func={(id) => this.parentMethod(id)}
+               page={this.state.page} paginateDisp={paginateDisp} 
+              site_id={site_id} column_id={column_id} />
+            </div>            
           </div>          
         </div>
       </div> 
