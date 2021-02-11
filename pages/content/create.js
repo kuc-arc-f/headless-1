@@ -102,8 +102,16 @@ export default class extends Component {
           <Link href={`/content/list?site_id=${site_id}`}>
             <a className="btn btn-outline-primary mt-2">Back</a></Link>
           <hr className="mt-2 mb-2" />
-          <h3>{content_name} - Add</h3>
-          <hr />
+          <div className="row">
+            <div className="col-sm-6">
+              <h3>{content_name} - Add</h3>
+            </div>
+            <div className="col-sm-6">
+              <button className="btn btn-primary" onClick={this.handleClick}>Create
+              </button>
+            </div>
+          </div>
+          <hr className="mt-2 mb-2" />
           {columns.map((item, index) => {
 //            console.log(item.name)
             if(item.name != ""){
@@ -113,10 +121,6 @@ export default class extends Component {
             }
           })}  
         </form>
-        <div className="form-group">
-          <button className="btn btn-primary" onClick={this.handleClick}>Create
-          </button>
-        </div>                
       </div>
       <Footer />
     </LayoutAdmin>

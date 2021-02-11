@@ -111,13 +111,22 @@ export default class extends Component {
     <LayoutAdmin>
       <NaviColumns  site_name={""} site_id={this.props.site_id} /> 
       <div className="container">
+        <Link href={`/content_type/${this.props.site_id}`}>
+          <a className="btn btn-outline-primary mt-2">Back</a></Link>
+        <hr className="mt-2 mb-2" />
+        <div className="row">
+          <div className="col-sm-6">
+          <h3>Content - Create</h3>
+          </div>
+          <div className="col-sm-6">
+            <button className="btn btn-primary" onClick={this.handleClick}>Create
+            </button>
+          </div>
+        </div>
+        <hr className="mt-2 mb-2" />
         <form action="/api/columns/new" method="post" id="myForm" name="myForm">
           <input type="hidden" id="colmuns_json" name="colmuns_json" />
           <input type="hidden" id="site_id" name="site_id" value={this.props.site_id}/>          
-          <Link href={`/content_type/${this.props.site_id}`}>
-            <a className="btn btn-outline-primary mt-2">Back</a></Link>
-          <hr className="mt-2 mb-2" />
-          <h3>Content - Create</h3>
           <div className="row">
             <div className="col-md-6 form-group">
               <label>Content Name:</label>
@@ -133,8 +142,6 @@ export default class extends Component {
           {this.tabRow()}
         </form>
         <div className="form-group">
-          <button className="btn btn-primary" onClick={this.handleClick}>Create
-          </button>
         </div>                
       </div>
       <Footer />

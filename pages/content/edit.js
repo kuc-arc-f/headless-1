@@ -133,8 +133,16 @@ export default class extends Component {
           <Link href={`/content/list?site_id=${site_id}`}>
             <a className="btn btn-outline-primary mt-2">Back</a></Link>
           <hr className="mt-2 mb-2" />
-          <h3>{content_name} - Edit</h3>
-          <hr />
+          <div className="row">
+            <div className="col-sm-6">
+            <h3>{content_name} - Edit</h3>
+            </div>
+            <div className="col-sm-6">
+              <button className="btn btn-primary" onClick={this.handleClick}>Save
+              </button>
+            </div>
+          </div>
+          <hr className="mt-2 mb-2" />          
           {columns.map((item, index) => {
             var contentValue = LibContent.get_item(contentObj , item.name)
 // console.log(contentValue )
@@ -146,10 +154,6 @@ export default class extends Component {
             }
           })}  
         </form>
-        <div className="form-group">
-          <button className="btn btn-primary" onClick={this.handleClick}>Save
-          </button>
-        </div>
         <hr />                
         <div className="form-group">
           <button className="btn btn-danger" onClick={this.handleClickDelete}>Delete

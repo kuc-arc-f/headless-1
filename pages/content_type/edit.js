@@ -39,7 +39,7 @@ console.log("q=", ctx.query)
       content_name: '', columns: ''
     }
     this.handleClick = this.handleClick.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+//    this.handleChange = this.handleChange.bind(this);
     this.database = null
 //console.log(props)
   }
@@ -60,13 +60,14 @@ console.log("q=", ctx.query)
       Router.push('/login');
     }
   }
+  /*
   handleChange(event) {
-//console.log(event.target.name )
     const value = event.target.value;
     if(event.target.name == "content_name"){
       this.setState({ content_name: value });
     }
   }       
+  */
   handleClick(){
     this.add_item()
   } 
@@ -75,7 +76,7 @@ console.log("q=", ctx.query)
       var myForm = document.getElementById('myForm');
       var formData = new FormData(myForm); 
       var valid = LibContentType.valid_form(formData)
-      if(valid==false){ throw new Error('Invalid , valid_form'); }
+//      if(valid==false){ throw new Error('Invalid , valid_form'); }
 //console.log(valid)
       var elem = []
       for(var i= 0; i< 10; i++){
@@ -118,28 +119,32 @@ console.log("q=", ctx.query)
     <LayoutAdmin>
       <NaviColumns  site_name={""} site_id={this.props.site_id} />
       <div className="container">
-        <form action="/api/columns/update" method="post" id="myForm" name="myForm">
-          <input type="hidden" id="colmuns_json" name="colmuns_json" />
-          <input type="hidden" id="site_id" name="site_id" value={this.props.site_id}/>  
-          <input type="hidden" id="id" name="id" value={this.props.column_id}/>  
-          <Link href={`/content_type/${this.props.site_id}`}>
-            <a className="btn btn-outline-primary mt-2">Back</a></Link>
-          <hr className="mt-2 mb-2" />
-          <h3>Content - Edit</h3>
-          <div className="row">
-            <div className="col-md-6 form-group mb-0">
-              <label>Content Name : {this.state.content_name}</label>
-            </div>
+        <Link href={`/content_type/${this.props.site_id}`}>
+          <a className="btn btn-outline-primary mt-2">Back</a></Link>
+        <hr className="mt-2 mb-2" />
+        <div className="row">
+          <div className="col-sm-6">
+            <h3>Content - Edit</h3>
           </div>
-          <hr className="mt-2 mb-2" />
+          <div className="col-sm-6">
+            <button className="btn btn-primary" onClick={this.handleClick}>Save
+            </button>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-6 form-group mb-0">
+            <label>Content Name : {this.state.content_name}</label>
+          </div>
+        </div>
+        <hr className="mt-2 mb-2" />
+        <form action="/api/columns/update" method="post" id="myForm" name="myForm">
+        <input type="hidden" id="colmuns_json" name="colmuns_json" />
+        <input type="hidden" id="site_id" name="site_id" value={this.props.site_id}/>  
+        <input type="hidden" id="id" name="id" value={this.props.column_id}/>  
           <h3>Column Setting :</h3>
           <hr />
           {this.tabRow()}
         </form>
-        <div className="form-group">
-          <button className="btn btn-primary" onClick={this.handleClick}>Save
-          </button>
-        </div>                
       </div>
       <Footer />
     </LayoutAdmin>
