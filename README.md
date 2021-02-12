@@ -6,7 +6,7 @@
 
  date    : 2021/01/29
 
- update  : 2021/02/12
+ update  : 2021/02/13
 
 ***
 ### Summary
@@ -55,6 +55,11 @@ https://github.com/kuc-arc-f/headless-1/blob/main/doc/manual_doc/5_webhook.md
 * Start :
 
 yarn dev
+
+* if change ,release mode
+
+yarn serve
+
 
 ***
 ### API sample
