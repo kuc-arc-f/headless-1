@@ -6,19 +6,18 @@
 
  date    : 2021/01/29
 
- update  : 2021/02/13
+ update  : 2021/02/15
 
 ***
 ### Summary
 
-headless CMS sample, Next.js + mongodb
+headless CMS , Next.js + mongodb
 
 ***
 ### required
 * Next.js : 10.0.0
 * mongodb : 3.6.3
 * node : 14.11
-
 
 ***
 ### Setup
@@ -46,17 +45,12 @@ if change, port number ( -p )
 ```
 
 ***
-### webhook start
-
-https://github.com/kuc-arc-f/headless-1/blob/main/doc/manual_doc/5_webhook.md
-
-***
 ### start server
 * Start :
 
 yarn dev
 
-* if change ,release mode
+* if change , release mode
 
 yarn serve
 
@@ -67,14 +61,14 @@ yarn serve
 https://github.com/kuc-arc-f/headless-1/blob/main/doc/manual_doc/3_api_sample.md
 
 ***
-### API write sample
-
-https://github.com/kuc-arc-f/headless-1/blob/main/doc/manual_doc/4_api_write_sample.md
-
-***
 ### SSG sample, Next.js 
 
 https://github.com/kuc-arc-f/jamstack-head-sample
+
+***
+### Document
+
+https://cms-kuc-jamstack1.netlify.app/pages/6029cea268013b004be190e2
 
 ***
 ### Blog : 
