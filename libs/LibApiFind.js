@@ -33,5 +33,18 @@ export default {
     ret = row
     return ret
   },
+  get_order_items: function(items, column, asc_type){
+    var ret = [];
+    items.sort(function (a, b) {
+//      return a.num - b.num;
+      return a[column] - b[column];
+    });  
+    if(asc_type == "DESC"){
+      items.forEach(function(item){ ret.unshift(item) });
+    }else{
+      items.forEach(function(item){ ret.push(item) });
+    }
+    return ret
+  },
 
 }
