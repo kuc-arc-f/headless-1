@@ -20,6 +20,7 @@ content name : Site > ContentType > content name
 
 site_id : Site > open > site_id
 
+***
 * skip, limit (option)
 
 skip : start position
@@ -30,6 +31,26 @@ limit : limit record count
 
 ```
 curl "http://localhost:3001/api/get/find?content=test_1&site_id=601a52687c693223ee03f570&skip=0&limit=10"
+```
+
+***
+* order (option)　、並び替え
+
+* colmun name : ex price
+
+* ASC/DESC : 
+
+　ＡSC : 昇順
+
+  DESC : 降順
+
+数値以外は、正しくソートできません
+
+* curl sample  / order
+
+```
+curl "http://localhost:3001/api/get/find?content=test_6&site_id=601a52687c693223ee03f570&order=price:DESC"
+
 ```
 
 ***
