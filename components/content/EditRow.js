@@ -38,6 +38,15 @@ export default class extends React.Component {
           </div>
         ) : ""
         }
+        {(this.props.type=="3")? (
+          <div className="form-group">
+            <label>{this.props.name} :</label>
+            <input type="number" name={this.props.name} value={this.state.value}
+              onChange={this.handleChange.bind(this)} className="form-control"
+             ></input>
+          </div>
+        ) : ""
+        }
       </div>    
     </div>
     );

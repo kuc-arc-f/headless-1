@@ -21,6 +21,7 @@ export default function Page(props){
         <option value="0">Select please</option>
         <option value="1">Text</option>
         <option value="2">Text Area</option>
+        <option value="3">Number</option>
       </select>              
     </div>
   </div>

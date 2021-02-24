@@ -23,6 +23,15 @@ export default function Page(props){
         </div>
       ) : ""
       }
+      {(props.type=="3")? (
+        <div className="form-group">
+          <label>{props.name} :</label>
+          <input type="number" name={props.name} 
+            className="form-control" ></input>
+        </div>
+      ) : ""
+      }
+
     </div>    
   </div>
   );
