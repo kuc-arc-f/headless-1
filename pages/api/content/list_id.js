@@ -13,11 +13,10 @@ export default async function (req, res){
 // console.log(page_info) 
     var limit = {skip: page_info.start , limit: page_info.limit }
 //    var limit = { limit: 500 }
-    var collection = await LibMongo.get_collection("contents")
     var where = {site_id:  req.query.site_id ,
       column_id: id,
     }
-    var items = await collection.find(where, limit).sort({created_at: -1}).toArray()
+    var items = await LibMongo.get_arrayLimit("contents" , where, limit)  
     var ret ={
       items: items
     }

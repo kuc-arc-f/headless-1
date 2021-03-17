@@ -6,9 +6,9 @@ export default async function (req, res){
   try{
 //console.log( "site_id=", req.query.site_id )
     var site_id = req.query.site_id 
-    var collection = await LibMongo.get_collection("columns" )
     var where = { site_id: site_id }
-    var items = await collection.find(where).sort({created_at: -1}).toArray()
+    var items = await LibMongo.get_arrayWhere("columns" , where)
+// console.log(items)
     var ret ={
       items: items
     }

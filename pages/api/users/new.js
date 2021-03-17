@@ -20,9 +20,7 @@ export default async function (req, res){
       created_at: new Date(),
     }    
 //console.log(item);
-    const collection = await LibMongo.get_collection("users" )
-    await collection.insertOne(item); 
-
+    await LibMongo.add_item("users" ,item )
     var ret ={
       item: item
     }

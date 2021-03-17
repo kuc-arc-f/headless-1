@@ -10,12 +10,7 @@ export default async function (req, res){
 //console.log(req.body);
     var data = req.body
     var token =data._token
-//    if(tokens.verify(process.env.CSRF_SECRET, token) === false){
-//      throw new Error('Invalid Token, csrf_check');
-//    }    
-console.log(data)
-//      var dat = JSON.parse(data.colmuns_json || '[]')
-// console.log( dat.length )
+//console.log(data)
       var item = {
         name: data.content_name ,  
         values: data.colmuns_json,
@@ -24,8 +19,7 @@ console.log(data)
         created_at: new Date(),
       };
 console.log(item)
-    const collection = await LibMongo.get_collection("columns" )
-    await collection.insertOne(item); 
+    await LibMongo.add_item("columns" ,item ) 
     var url = "/content_type/" + data.site_id
     if (res) {
 //      res.writeHead(302, { Location: '/sites' });

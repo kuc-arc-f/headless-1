@@ -6,13 +6,11 @@ export default async function (req, res){
   try{
 //    console.log("id=", req.query.id);
     var id = req.query.id
-    const collection = await LibMongo.get_collection("sites" )
     var where = { _id: new ObjectID(id) }
-    var item = await collection.findOne(where) 
+    var item = await LibMongo.get_item("sites" , where ) 
     //
-    const collectionKey = await LibMongo.get_collection("apikeys" )
     var whereKey = { site_id: id }
-    var itemKey = await collectionKey.findOne(whereKey)     //           
+    var itemKey = await LibMongo.get_item("apikeys" , whereKey )           
     var ret ={
       item: item,
       apikey : itemKey,

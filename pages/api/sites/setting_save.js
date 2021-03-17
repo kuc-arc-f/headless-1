@@ -17,15 +17,14 @@ export default async function (req, res){
       user_id: "",
       created_at: new Date(),
     };    
-    const collection = await LibMongo.get_collection("site_settings" )
     var where = {site_id:  data.site_id}
-    var itemOne = await collection.findOne(where); 
+    var itemOne = await LibMongo.get_item("site_settings" , where ) 
     if(itemOne != null ){
-console.log(itemOne);
+//console.log(itemOne);
       itemOne.webhook_url = webhook_url
-      await collection.updateOne(where, { $set: itemOne })
+      await LibMongo.update_item("site_settings" , where, itemOne )
     }else{
-      await collection.insertOne(item); 
+      await LibMongo.add_item("site_settings" ,item )
     }
     res.json([]);
   } catch (err) {

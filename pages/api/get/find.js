@@ -9,7 +9,6 @@ export default async function (req, res){
     var content_name = req.query.content
     var site_id = req.query.site_id
 // console.log(content_name ,site_id );
-    const collection = await LibMongo.get_collection("contents")
     var items = []
     var where ={site_id: site_id,
       name: content_name
@@ -22,7 +21,7 @@ export default async function (req, res){
       if(orderArr.length < 2){ throw new Error('error, orderArr.length'); }
       var order_col = orderArr[0]
       var order_asc = orderArr[1]
-      items = await collection.find(where).toArray() 
+      items = await LibMongo.get_arrayWhere("contents" , where)
       items = LibApiFind.convert_items(items) 
       items = LibApiFind.get_order_items(items, order_col, order_asc)
       if(( typeof req.query.skip !='undefined') &&
@@ -37,9 +36,9 @@ export default async function (req, res){
       ( typeof req.query.limit !='undefined')){
 //console.log("skip=", req.query.skip, req.query.limit );
         var limit = {skip: parseInt(req.query.skip) , limit: parseInt(req.query.limit) }
-        items = await collection.find(where, limit).sort({created_at: -1}).toArray()  
+        items = await LibMongo.get_arrayLimit("contents" , where, limit)  
       }else{
-        items = await collection.find(where).sort({created_at: -1}).toArray()  
+        items = await LibMongo.get_arrayWhere("contents" , where) 
       }
       items = LibApiFind.convert_items(items) 
     }

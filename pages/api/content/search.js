@@ -10,9 +10,6 @@ export default async function (req, res){
   try{
     var data = req.body
     var token =data._token
-//    if(tokens.verify(process.env.CSRF_SECRET, token) === false){
-//      throw new Error('Invalid Token, csrf_check');
-//    }       
 // console.log( data )
     var column_id = data.column_id 
     var site_id = data.site_id 
@@ -20,9 +17,8 @@ export default async function (req, res){
     var where = {site_id:  site_id,
       column_id: column_id,
     }
-    var collection = await LibMongo.get_collection("contents")
-    var items = await collection.find(where, {limit: 500 })
-    .sort({created_at: -1}).toArray()
+    var limit = {skip: 0 , limit: 500 }
+    var items = await LibMongo.get_arrayLimit("contents" , where, limit)      
     items = LibContent.getSearchItems(items, search_key ,[] )
 //console.log( items )    
     var ret ={

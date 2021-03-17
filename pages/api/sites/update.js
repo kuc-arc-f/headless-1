@@ -13,13 +13,12 @@ export default async function (req, res){
       throw new Error('Invalid Token, csrf_check');
     }  
     var id = data.id
-    const collection = await LibMongo.get_collection("sites" )
     var where = {"_id": new ObjectID( id )};
-    var itemOne = await collection.findOne(where) 
+    var itemOne = await LibMongo.get_item("sites" , where ) 
     itemOne.name = data.name
     itemOne.content = data.content
 //console.log(itemOne);
-    await collection.updateOne(where, { $set: itemOne })
+    await LibMongo.update_item("sites" , where, itemOne )
 //console.log(id);
     var ret ={
       item: itemOne

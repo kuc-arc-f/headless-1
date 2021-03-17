@@ -9,17 +9,13 @@ export default async function (req, res){
   try{
     var data = req.body
 // console.log(data);
-//    if(tokens.verify(process.env.CSRF_SECRET, data._token) === false){
-//      throw new Error('Invalid Token, csrf_check');
-//    }  
     var item = data
 //console.log(item);
-    const collection = await LibMongo.get_collection("columns")
     var where = {"_id": new ObjectID( item.id )};
-    var itemOne = await collection.findOne(where) 
+    var itemOne = await LibMongo.get_item("columns" , where ) 
     itemOne.values = item.colmuns_json
 // console.log(itemOne);
-    await collection.updateOne(where, { $set: itemOne })
+    await LibMongo.update_item("columns" , where, itemOne )
     var url = `/content_type/${itemOne.site_id}`
 //console.log( "url=",url  )       
     if (res) {

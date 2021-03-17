@@ -8,19 +8,14 @@ import LibMongo from "../../../libs/LibMongo"
 export default async function (req, res){
   try{
     var data = req.body
-//    if(tokens.verify(process.env.CSRF_SECRET, data._token) === false){
-//      throw new Error('Invalid Token, csrf_check');
-//    }  
     var item = data
     var values = JSON.parse(data.colmuns_json || '[]')
-    const collection = await LibMongo.get_collection("contents")
     var where = {"_id": new ObjectID( item.id )};
-    var itemOne = await collection.findOne(where) 
+    var itemOne = await LibMongo.get_item("contents" , where ) 
     itemOne.values = values
 //console.log(itemOne);
-    await collection.updateOne(where, { $set: itemOne })
+    await LibMongo.update_item("contents" , where, itemOne )
     var url = `/content/list?site_id=${item.site_id}&column=${itemOne.column_id}`
-//    var url = `/content/show?id=${itemOne.column_id}&site_id=${item.site_id}`
 //console.log( "url=",url  )   
     if (res) {
       res.writeHead(302, { Location: url });

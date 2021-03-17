@@ -9,9 +9,6 @@ export default async function (req, res){
   try{
     var data = req.body
     var token =data._token
-//    if(tokens.verify(process.env.CSRF_SECRET, token) === false){
-//      throw new Error('Invalid Token, csrf_check');
-//    }    
 //console.log( data )
     var cole_name = data.content_name
     var values = JSON.parse(data.colmuns_json || '[]')
@@ -24,8 +21,7 @@ export default async function (req, res){
       created_at: new Date(),
     };    
 //console.log( item )
-    const collection = await LibMongo.get_collection( "contents" )
-    await collection.insertOne(item); 
+    await LibMongo.add_item("contents" ,item )
     var url = `/content/list?site_id=${item.site_id}&column=${item.column_id}`
 //    console.log( "url=",url  )
     if (res) {

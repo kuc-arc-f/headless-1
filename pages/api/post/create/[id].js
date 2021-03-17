@@ -14,23 +14,20 @@ export default async function (req, res){
     var apikey = req.headers.apikey
     var data = req.body
     var token =data._token
-//console.log( "key=", apikey )
 //console.log( "content_name=", content_name )
 //console.log( data )
     var where = { key:  apikey }
-    const collectionKeys = await LibMongo.get_collection( "apikeys" )
-    var key = await collectionKeys.findOne(where); 
+    var key = await LibMongo.get_item("apikeys" , where ) 
     if(key == null){ throw new Error('Invalid key , apikeys') }
-//console.log( "site_id=", key.site_id )
     var site_id = key.site_id
+// console.log( "site_id=", key.site_id )
     var whereColumn = {
       site_id:  site_id, name: content_name,
     }
-    const collection = await LibMongo.get_collection( "columns" )
-    var column = await collection.findOne(whereColumn); 
+    var column = await LibMongo.get_item("columns" , whereColumn ) 
     var coluValues = JSON.parse(column.values || '[]')
+//console.log( column )
     var newData = LibApiCreate.valid_post(data, coluValues)
-//console.log( newData )
     var item = {
       name: content_name,
       column_id: column._id.toString(),
@@ -39,9 +36,8 @@ export default async function (req, res){
       user_id: "",
       created_at: new Date(),
     };
-// console.log( item )
-    const collectionContent = await LibMongo.get_collection( "contents" )
-    await collectionContent.insertOne(item); 
+//console.log( item )
+    await LibMongo.add_item("contents" ,item )
     res.json({return: 1})
   } catch (err) {
     console.log(err);

@@ -7,9 +7,6 @@ export default {
     get_show_item :async function(id){
         try {
             var item = []
-            const collection = await LibMongo.get_collection("tasks" )
-            var where = { _id: new ObjectID(id) }
-            var item = await collection.findOne(where)            
 console.log('#get_items.id=' ,id)
 // console.log( item)            
             return item

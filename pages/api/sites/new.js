@@ -20,10 +20,9 @@ export default async function (req, res){
       user_id: "",
       created_at: new Date(),
     };
-    const collection = await LibMongo.get_collection("sites" )
-    await collection.insertOne(item); 
+    item = await LibMongo.add_item("sites" ,item )
 // console.log("id=", item._id.toString() , typeof(item._id) )
-    //
+//console.log(item)       //
     var key = LibSite.get_apikey()
     var itemKey ={
       site_id: item._id.toString(),
@@ -31,10 +30,8 @@ export default async function (req, res){
       user_id: "",
       created_at: new Date(),
     }
-    const collectionKey = await LibMongo.get_collection("apikeys" )
-    await collectionKey.insertOne(itemKey); 
-console.log(itemKey)   
-
+    itemKey = await LibMongo.add_item("apikeys" ,itemKey )
+//console.log(itemKey)   
     var ret ={
       item: item
     }

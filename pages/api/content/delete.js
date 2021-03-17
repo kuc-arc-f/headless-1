@@ -7,11 +7,9 @@ export default async function (req, res){
     var data = req.body
     var id = data.id
 //console.log(data);
-    const collection = await LibMongo.get_collection("contents")
     var where = { "_id": new ObjectID( id ) };
-    var itemOne = await collection.findOne(where)
 //console.log(itemOne); 
-    await collection.deleteOne(where)    
+    await LibMongo.delete_item("contents" , where )   
 // var url = `/content/list?site_id=${itemOne.site_id}&column=${itemOne.column_id}`
 //console.log(url);
     var ret ={

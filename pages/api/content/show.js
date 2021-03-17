@@ -6,9 +6,8 @@ export default async function (req, res){
   try{
 //console.log("apiShow.query=", req.query);
     var id = req.query.id
-    const collection = await LibMongo.get_collection("contents")
     var where = { _id: new ObjectID(id) }
-    var item = await collection.findOne(where)            
+    var item = await LibMongo.get_item("contents" , where )           
     var ret ={
       item: item
     }

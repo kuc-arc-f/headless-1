@@ -16,28 +16,19 @@ export default async function (req, res){
     var data = req.body
     var token =data._token
 //console.log( "key=", apikey )
-console.log( "content_name=", content_name )
+//console.log( "content_name=", content_name )
     if(typeof data.id =='undefined'){
       throw new Error('Invalid , id');
     }
     var id = data.id
-console.log( "id=", id  )
+//console.log( "id=", id  )
     var where = { key:  apikey }
-    const collectionKeys = await LibMongo.get_collection( "apikeys" )
-    var key = await collectionKeys.findOne(where); 
+    var key = await LibMongo.get_item("apikeys" , where ) 
     if(key == null){ throw new Error('Invalid key , apikeys') }
-console.log( "site_id=", key.site_id )
-    /*
-    var site_id = key.site_id
-    var whereColumn = {
-      site_id:  site_id, name: content_name,
-    }
-    */
-    const collection = await LibMongo.get_collection("contents")
+//console.log( "site_id=", key.site_id )
     var where = { "_id": new ObjectID( id ) };
+    await LibMongo.delete_item("contents" , where )
 //console.log(itemOne); 
-    await collection.deleteOne(where) 
-//    await collectionContent.insertOne(item); 
     res.json({return: 1})
   } catch (err) {
     console.log(err);
