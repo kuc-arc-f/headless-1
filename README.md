@@ -6,7 +6,7 @@
 
  date    : 2021/01/29
 
- update  : 2021/03/17
+ update  : 2021/03/31
 
 ***
 ### Summary
@@ -66,9 +66,9 @@ https://github.com/kuc-arc-f/headless-1/blob/main/doc/manual_doc/3_api_sample.md
 https://github.com/kuc-arc-f/jamstack-head-sample
 
 ***
-### Document
+### Get Started / Document
 
-https://cms-kuc-jamstack1.netlify.app/pages/6029cea268013b004be190e2
+https://cms-kuc-headless1.netlify.app/pages/20210331115325
 
 ***
 ### Blog : 
